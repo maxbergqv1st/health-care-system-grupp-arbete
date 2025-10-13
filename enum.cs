@@ -1,17 +1,32 @@
 namespace App;
 
-public enum Status
+public enum UStatus
 {
-    active,
+    Admin,
+    Patient,
+    Doctor,
+}
+public enum Uactivity
+{
+    activ,
     inactive,
+    offline,
 
 }
-public enum Val
+public enum Startmenu
 {
-    home,
-
+    login = 1,
+    register = 2,
+    exit = 3,
 }
-public enum Regionhalland
+public enum Mainmenu
+{
+    logout = 1,
+    settings = 2,
+    profile = 3,
+    exit = 4,
+}
+public enum Region
 {
     
 }
