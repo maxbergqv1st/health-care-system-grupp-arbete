@@ -33,8 +33,6 @@ class Admin : IUser
   {
     return username == Username && password == _password; //Skickar username och password till metoden. Returnar true eller false.
   }
-
-  public void
 }
 
 /*
