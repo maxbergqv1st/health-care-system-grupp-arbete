@@ -2,20 +2,19 @@ namespace App;
 
 class Patient : IUser
 {
-    public string Name;
-    public string Email;
-    public string _password;
+    public string Name { get; set; }
+    public string Username { get; set; }
+    public string _password { get; set; }
 
-    public Patient(string name, string email, string password)
+    public Patient(string name, string username, string password)
     {
         Name = name;
-        Email = email;
+        Username = username;
         _password = password;
     }
 
     public bool TryLogin(string username, string password)
     {
-        return username == Email && password == _password;
-
+        return username == Username && password == _password;
     }
 }
