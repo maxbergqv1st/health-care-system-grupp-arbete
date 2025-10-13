@@ -1,2 +1,18 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using App;
+
+bool running = true;
+bool active_user = false;
+
+while(running)
+{
+      if (!active_user)
+      {
+            Console.WriteLine("Login Page");
+            Console.ReadLine();
+      }
+      else
+      {
+            Console.WriteLine("Logged in page");
+            Console.ReadLine();
+      }
+}
