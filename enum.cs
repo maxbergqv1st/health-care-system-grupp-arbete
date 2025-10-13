@@ -28,5 +28,9 @@ public enum Mainmenu
 }
 public enum Region
 {
-    
+    North, // = 1,
+    West,
+    East,
+    South,
+    Everything
 }

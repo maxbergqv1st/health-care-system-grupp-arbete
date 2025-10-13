@@ -1,3 +1,5 @@
+using System.Net;
+
 namespace App;
 
 class Patient : IUser
@@ -6,11 +8,14 @@ class Patient : IUser
     public string Username { get; set; }
     public string _password { get; set; }
 
-    public Patient(string name, string username, string password)
+    public Region UserStatus { get; set; }
+
+    public Patient(string name, string username, string password, Region region)
     {
         Name = name;
         Username = username;
         _password = password;
+        UserStatus = region;
     }
 
     public bool TryLogin(string username, string password)
