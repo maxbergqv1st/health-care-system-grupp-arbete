@@ -4,15 +4,13 @@ namespace App;
 
 public enum AdminPermission
 {
+  None,
   ManagePermissions,
   AssignRegions,
   HandleRegistrations,
   AddLocations,
   CreatePersonellAccounts,
   ViewPermissionsList,
-  AcceptPatientRegistration,
-  DenyPatientRegistration,
-
 }
 
 class Admin : IUser
