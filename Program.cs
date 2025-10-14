@@ -111,10 +111,46 @@ while (running)
       else if (active_user.GetType().Name == "Doctor")
       {
             Console.Clear();
-            // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine("Logged in as Doctor");
+                        // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
+            Console.Clear();
+            Console.WriteLine("logged in as doctor");
+            Console.WriteLine("profile[1] \nlogout[2] \nexit [3]");
             Console.ReadLine();
+            string rl() => Console.ReadLine();
+            switch(Console.ReadLine())
+            {
+
+                  case "1":
+                  
+                        Console.WriteLine("your profile:");
+                        foreach(IUser user in users)
+                        {
+                              Console.WriteLine($"{user.Name}");
+                        }
+                        Console.WriteLine($"du är i ");
+                        rl();
+                        
+                        break;
+               
+                  case "2":
+                        active_user = null;
+                        Console.WriteLine("logged out");
+                        Console.ReadKey();
+                    
+                        break;
+                  case "3":
+                        running = false;
+                        break;
+                  case "4":
+                        Console.Clear();
+                        Console.ReadLine();
+                        break;
+
+             }
+            
+            
       }
+
       else if (active_user.GetType().Name == "Admin")
       {
             Console.Clear();
