@@ -1,4 +1,5 @@
-﻿using App;
+﻿using System.ComponentModel.Design;
+using App;
 
 SaveUserSystem userSystem = new();
 List<IUser> users = userSystem.LoadUser();
@@ -7,7 +8,7 @@ bool found = false;
 bool running = true;
 IUser active_user = null;
 
-while(running)
+while (running)
 {
       if (active_user == null)
       {
@@ -107,12 +108,72 @@ while(running)
             Console.WriteLine("Logged in as Doctor");
             Console.ReadLine();
       }
-      else if(active_user.GetType().Name == "Admin")
+      else if (active_user.GetType().Name == "Admin")
       {
             Console.Clear();
             //MACKISH ADMIN
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.WriteLine("Logged in as Admin");
-            Console.ReadLine();
+            Console.WriteLine("----- Menu -----");
+            Console.WriteLine("[1] manage permissons\n[2] register\n[3] quit\nWrite a index to move around [X]");
+            string? input = Console.ReadLine();
+            if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int. 
+
+                  switch ((AdminPermission)choice)//Switchen använder min enum AdminPermission.choice om den inte hittar caset körs default.
+                  {
+                        case AdminPermission.ManagePermissions:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Manage Permissions -----");
+                                    break;
+                              }
+                        case AdminPermission.AssignRegions:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Assign Regions -----");
+                                    break;
+                              }
+                        case AdminPermission.HandleRegistrations:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Handle Registrations -----");
+                                    //Accept
+                                    //Deny
+                                    break;
+                              }
+                        case AdminPermission.AddLocations:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Add Locations -----");
+                                    break;
+                              }
+
+                        case AdminPermission.CreatePersonellAccounts:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Create Personell Accounts -----");
+                                    break;
+                              }
+                        case AdminPermission.ViewPermissionsList:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- View Permissions List -----");
+                                    break;
+                              }
+                        case AdminPermission.AcceptPatientRegistration:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Accept Patient Registration -----");
+                                    break;
+                              }
+                        case AdminPermission.DenyPatientRegistration:
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Manage Permissions -----");
+                              }
+
+                              break;
+                  }
+
       }
-} 
+}
