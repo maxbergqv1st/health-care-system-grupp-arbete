@@ -120,9 +120,8 @@ while (running)
             Console.Clear();
             //MACKISH ADMIN
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine("Logged in as Admin");
-            Console.WriteLine("----- Menu -----");
-            Console.WriteLine("[1] manage permissons\n[2] register\n[3] quit\nWrite a index to move around [X]");
+            Console.WriteLine("----- Admin Menu -----");
+            Console.WriteLine("[1] manage permissons\n[2] Assign Regions\n[3] Handle Registrations\n[4] Add Locations\n[5] Create Personell Accounts\n[6] View Permissions List");
             string? input = Console.ReadLine();
             if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int. 
 
@@ -132,12 +131,14 @@ while (running)
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- Manage Permissions -----");
+                                    Console.ReadLine();
                                     break;
                               }
                         case AdminPermission.AssignRegions:
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- Assign Regions -----");
+                                    Console.ReadLine();
                                     break;
                               }
                         case AdminPermission.HandleRegistrations:
@@ -146,12 +147,14 @@ while (running)
                                     Console.WriteLine("----- Handle Registrations -----");
                                     //Accept
                                     //Deny
+                                    Console.ReadLine();
                                     break;
                               }
                         case AdminPermission.AddLocations:
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- Add Locations -----");
+                                    Console.ReadLine();
                                     break;
                               }
 
@@ -159,25 +162,17 @@ while (running)
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- Create Personell Accounts -----");
+                                    Console.ReadLine();
                                     break;
                               }
                         case AdminPermission.ViewPermissionsList:
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- View Permissions List -----");
-                                    break;
+                                    Console.ReadLine();
+
                               }
-                        case AdminPermission.AcceptPatientRegistration:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- Accept Patient Registration -----");
-                                    break;
-                              }
-                        case AdminPermission.DenyPatientRegistration:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- Manage Permissions -----");
-                              }
+
 
                               break;
                   }
