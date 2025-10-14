@@ -15,11 +15,12 @@ while (running)
             // ACTIVE USER = INTE HITTAD.
             Console.Clear();
             Console.WriteLine("----- Menu -----");
-            Console.WriteLine("login\n[admin] [patient] [doctor] register\nadmin\nquit");
+            Console.WriteLine("Login [1]\nRegister admin [2]\nRegister doctor [3]\nRegister patient [4]\nQuit [5]\n");
             switch (Console.ReadLine())
             {
-                  case "login":
+                  case "1":
                         {
+                              Console.Clear();
                               Console.WriteLine("----------");
                               Console.WriteLine("Username: ");
                               string input_username = Console.ReadLine();
@@ -40,8 +41,9 @@ while (running)
                               }
                         }
                         break;
-                  case "admin":
+                  case "2":
                         {
+                              Console.Clear();
                               Console.WriteLine("----- Register -----");
                               Console.WriteLine("Name: ");
                               string input_name = Console.ReadLine();
@@ -55,8 +57,9 @@ while (running)
                               userSystem.SaveUser(users);
                         }
                         break;
-                  case "doctor":
+                  case "3":
                         {
+                              Console.Clear();
                               Console.WriteLine("----- Register -----");
                               Console.WriteLine("Name: ");
                               string input_name = Console.ReadLine();
@@ -70,8 +73,9 @@ while (running)
                               userSystem.SaveUser(users);
                         }
                         break;
-                  case "patient":
+                  case "4":
                         {
+                              Console.Clear();
                               Console.WriteLine("----- Register -----");
                               Console.WriteLine("Name: ");
                               string input_name = Console.ReadLine();
@@ -85,11 +89,14 @@ while (running)
                               userSystem.SaveUser(users);
                         }
                         break;
-                  case "quit":
+                  case "5":
                         {
                               running = false;
                         }
                         break;
+                  default:
+                        continue;
+
             }
             Console.ReadLine();
       }
@@ -97,7 +104,7 @@ while (running)
       {
             Console.Clear();
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine("Logged in as PAtient");
+            Console.WriteLine("Logged in as Patient");
             Console.WriteLine("profile\nlogout");
             Console.ReadLine();
       }
