@@ -4,6 +4,11 @@ using App;
 SaveUserSystem userSystem = new();
 List<IUser> users = userSystem.LoadUser();
 
+// IMPORT AppointmentFather FRÅN APOINTMENT.CS
+Event AddEvent = new();
+AppointmentFather Appointment = new();
+//
+
 bool found = false;
 bool running = true;
 IUser active_user = null;
@@ -15,7 +20,7 @@ while (running)
             // ACTIVE USER = INTE HITTAD.
             Console.Clear();
             Console.WriteLine("----- Menu -----");
-            Console.WriteLine("Login [1]\nRegister admin [2]\nRegister doctor [3]\nRegister patient [4]\nQuit [5]\n");
+            Console.WriteLine("[1] Login\n[2] Register admin\n[3] Register doctor\n[4] Register patient\n[5] Quit\n");
             switch (Console.ReadLine())
             {
                   case "1":
@@ -35,7 +40,7 @@ while (running)
                                           break;
                                     }
                               }
-                              if (found = false)
+                              if (found == false)
                               {
                                     Console.WriteLine("User wasnt found...");
                               }
@@ -105,7 +110,37 @@ while (running)
             Console.Clear();
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.WriteLine("Logged in as Patient");
-            Console.WriteLine("profile\nlogout");
+            Console.WriteLine("[1] profile\n[2] Make a appointment \n[3] Show appointments \n[L]logout");
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            switch(key.KeyChar)
+            {
+                  case '1':
+                        Console.Clear();
+                        Console.WriteLine("Profile");
+                        Console.ReadLine();
+                        break;
+                  case '2':
+                        Console.Clear();
+                        Console.WriteLine("----- Make a appointment -----");
+                        Appointment.MakeAppointment();
+                        Console.ReadLine();
+                  
+
+                        break;
+                  case '3':
+                        Console.Clear();
+                        Console.WriteLine("----- Show a appointment -----");
+                        // if active user finns i Appointment list
+                        //{
+                        Appointment.ShowAppointments();
+                        //}
+                        break;
+                  case 'L':
+                        active_user = null;
+                        break;
+            }
+
+
             Console.ReadLine();
       }
       else if (active_user.GetType().Name == "Doctor")
@@ -114,29 +149,21 @@ while (running)
                         // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
             Console.WriteLine("logged in as doctor");
-            Console.WriteLine("profile[1] \nlogout[2] \nexit [3]");
+            Console.WriteLine("[1] profile \n[2] logout\n[5] add Event\n[3] exit ");
             Console.ReadLine();
             string rl() => Console.ReadLine();
             switch(Console.ReadLine())
             {
 
                   case "1":
-                  
-                        Console.WriteLine("your profile:");
-                        foreach(IUser user in users)
-                        {
-                              Console.WriteLine($"{user.Name}");
-                        }
-                        Console.WriteLine($"du är i ");
-                        rl();
-                        
+                        Console.WriteLine("----- Show appointments -----");
+                        Appointment.ShowAppointments();
                         break;
-               
+                  
                   case "2":
                         active_user = null;
                         Console.WriteLine("logged out");
                         Console.ReadKey();
-                    
                         break;
                   case "3":
                         running = false;
@@ -145,12 +172,18 @@ while (running)
                         Console.Clear();
                         Console.ReadLine();
                         break;
-
-             }
+                  //
+                  case "5":
+                        {
+                              AddEvent.AddEvent(); // SaveEventJournal.cs
+                              Console.ReadLine();
+                        }
+                        break;
+                  //
+            }
             
             
       }
-
       else if (active_user.GetType().Name == "Admin")
       {
             Console.Clear();
