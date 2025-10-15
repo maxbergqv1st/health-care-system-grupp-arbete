@@ -1,6 +1,13 @@
 Admin,Mackan,mackish,pass,North
-Patient,max,madmax,pass,East
+Patient,Max,madmax,pass,North
+Patient,Max,maxan,pass,West
+Patient,Max,maximus,pass,South
+Patient,Max,mjmaxbq,pass,East
+Patient,Max,Hajen,pass,North
+Patient,Max,maxant@email.com,pass,West
+Patient,Max,Marre,pass,South
+Patient,Max,micke,pass,East
 Doctor,Lucas,lulle,pass,West
 Admin,Dusan,dus,pass,South
-Patient,test,testing,pass,North
-Doctor,f,f,f,North
+Patient,Zselyke,zse,pass,West
+Admin,Hugo,guggan,pass,North
