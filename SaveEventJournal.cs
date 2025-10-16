@@ -1,4 +1,5 @@
 namespace App;
+
 public class Event
 {
       SaveUserSystem userSystem = new();
@@ -8,41 +9,39 @@ public class Event
       }
       public class PatientEvent
       {
-            public string OwnerUsername { get; set; } // IUser.Username, make it so no username is the same
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string Description { get; set; }
-            public string Document { get; set; }
+            public string? OwnerUsername { get; set; } // IUser.Username, make it so no username is the same
+            public string? FirstName { get; set; }
+            public string? LastName { get; set; }
+            public string? Description { get; set; }
+            public string? Document { get; set; }
             public Region Location { get; set; }
       }
       List<IUser> users = new();
 
       bool found = false;
-      public void AddEvent()
+      public void AddEvent(IUser active_user)
       {
             Console.Clear();
             Console.WriteLine("[1] Add a event to patient\n[2] Back");
-            switch (Console.ReadLine())
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            switch (key.KeyChar)
             {
-                  case "1":
+                  case '1':
                         {
                               Console.Clear();
                               Console.WriteLine("----- Add Event ------");
-                              Console.WriteLine("Description: ");
-                              Console.WriteLine("Document");
-                              Console.WriteLine("Location");
+                              // Console.WriteLine("Description: ");
+                              // Console.WriteLine("Document");
+                              // Console.WriteLine("Location");
 
-                              // foreach (IUser user in users)
-                              // {
-                              //       Console.WriteLine($"{user.Name} {user.Username}");
-                              // }
 
                               Console.WriteLine("Patient name: ");
                               string? input_new_patient = Console.ReadLine();
                               List<IUser> matchedUsers = new();
+                              Region doctorRegion = active_user.UserStatus;
                               foreach (IUser user in users)
                               {
-                                    if (input_new_patient == user.Name)
+                                    if (input_new_patient == user.Name && doctorRegion == user.UserStatus)
                                     {
                                           matchedUsers.Add(user);
                                     }
@@ -50,147 +49,49 @@ public class Event
                               if (matchedUsers.Count > 0)
                               {
                                     Console.Clear();
-                                    Console.WriteLine($"| [N]orth | [W]est | [E]ast | [S]outh |");
                                     Console.WriteLine($"\n----- Users {input_new_patient} ------");
                                     found = true;
                                     foreach (IUser matched in matchedUsers)
                                     {
-                                          Console.WriteLine($"Patient {matched.Name} {matched.Username} {matched.UserStatus}");
-
+                                          Console.WriteLine($"Patient {matched.Name} [Lastname] {matched.Username} {matched.UserStatus}");
                                     }
-
-                                    ConsoleKeyInfo key = Console.ReadKey(true);
-
-                                    bool backToPatientMenu = false;
-
-                                    while (!backToPatientMenu)
+                                    Console.WriteLine("Lastname: ");
+                                    string input_lastname = Console.ReadLine();
+                                    foreach (IUser matched in matchedUsers)
                                     {
-                                          switch (key.KeyChar)
+                                          if (input_lastname == matched.Name) //SKA VARA MATCHED.LASTNAME
                                           {
-                                                case 'N': //'N' kan hålla ett värde jämfört med "N" //visste inte innnan
-                                                case 'n':
-                                                      Console.Clear();
 
-                                                      Console.WriteLine("\n----- North -----\n");
-                                                      foreach (IUser matched in matchedUsers)
-                                                      {
-                                                            if (matched.UserStatus == Region.North) // Kollar om enumen är north på 
-                                                            {
-                                                                  Console.WriteLine($"Patient {matched.Name} [Last Name] {matched.Username} {matched.UserStatus}");
-                                                            }
-                                                      }
-                                                      Console.ReadLine();
-
-
-                                                      break;
-                                                case 'W': //'N' kan hålla ett värde jämfört med "N" //visste inte innnan
-                                                case 'w':
-                                                      Console.Clear();
-
-                                                      Console.WriteLine("----- West -----\n");
-                                                      foreach (IUser matched in matchedUsers)
-                                                      {
-                                                            if (matched.UserStatus == Region.West) // Kollar om enumen är north på 
-                                                            {
-                                                                  Console.WriteLine($"Patient: {matched.Name} [Last Name] {matched.Username} {matched.UserStatus}");
-                                                            }
-                                                      }
-                                                      Console.ReadLine();
-                                                      break;
-                                                case 'E': //'N' kan hålla ett värde jämfört med "N" //visste inte innnan
-                                                case 'e':
-                                                      Console.Clear();
-
-                                                      Console.WriteLine("----- East -----\n");
-                                                      foreach (IUser matched in matchedUsers)
-                                                      {
-                                                            if (matched.UserStatus == Region.East) // Kollar om enumen är north på 
-                                                            {
-                                                                  Console.WriteLine($"Patient {matched.Name} [Last Name] {matched.Username} {matched.UserStatus}");
-                                                            }
-                                                      }
-                                                      Console.ReadLine();
-                                                      break;
-                                                case 'S': //'N' kan hålla ett värde jämfört med "N" //visste inte innnan
-                                                case 's':
-                                                      Console.Clear();
-
-                                                      Console.WriteLine("----- South -----\n");
-                                                      foreach (IUser matched in matchedUsers)
-                                                      {
-                                                            if (matched.UserStatus == Region.South) // Kollar om enumen är north på 
-                                                            {
-                                                                  Console.WriteLine($"Patient {matched.Name} [Last Name] {matched.Username} {matched.UserStatus}");
-                                                            }
-                                                      }
-                                                      Console.WriteLine($"Patient: {input_new_patient}");
-                                                      Console.WriteLine($"Lastname: MOCK");
-                                                      Console.WriteLine("Description: ");
-                                                      Console.WriteLine("Document");
-                                                      Console.WriteLine("Location");
-                                                      Console.ReadLine();
-                                                      break;
-                                                case 'B': //'N' kan hålla ett värde jämfört med "N" //visste inte innnan
-                                                case 'b':
-                                                      backToPatientMenu = true;
-                                                      break;
-                                                case 'A': //'N' kan hålla ett värde jämfört med "N" //visste inte innnan
-                                                case 'a':
-                                                      Console.Clear();
-                                                      Console.WriteLine($"Patient {input_new_patient}");
-                                                      string? FirstName = input_new_patient;
-                                                      Console.WriteLine($"Patient {input_new_patient}");
-                                                      //string? FirstName = input_new_patient;
-                                                      Console.WriteLine($"Lastname: MOCK");
-                                                      string? patient_lastname = Console.ReadLine();
-                                                      Console.WriteLine("Description: ");
-                                                      string? patient_description = Console.ReadLine();
-                                                      Console.WriteLine("Document");
-                                                      string? patient_document = Console.ReadLine();
-                                                      Console.WriteLine("Location N/W/E/S");
-                                                      string? location_input = Console.ReadLine();
-
-                                                      Region region = Region.North; // defaultar till north // change to doctors region as default
-                                                      if (location_input == "N") region = Region.North;
-                                                      else if (location_input == "W") region = Region.West;
-                                                      else if (location_input == "E") region = Region.East;
-                                                      else if (location_input == "S") region = Region.South;
-
-                                                      PatientEvent newEvent = new PatientEvent
-                                                      {
-                                                            // FirstName = patient_name;
-                                                      };
-
-                                                      break;
-                                                default:
-                                                      Console.WriteLine("Unvalid input...");
-                                                      backToPatientMenu = true;
-                                                      Console.ReadLine();
-                                                      backToPatientMenu = false;
-                                                      break;
                                           }
                                     }
                               }
+
                               if (!found)
                               {
-                                    Console.Clear();
                                     Console.WriteLine("NAMN EJ MATCHAT, KÖR DENNA SCOPE");
+                                    Console.Clear();
+                                    Console.WriteLine($"Patient name: {input_new_patient} ");
+                                    string? name = input_new_patient;
+                                    Console.WriteLine("Patient lastname: ");
+                                    string? lastname = Console.ReadLine();
+                                    Console.WriteLine("Patient username: ");
+                                    string? username = Console.ReadLine();
+                                    Console.WriteLine("Patient password: ");
+                                    string? _password = Console.ReadLine();
+                                    Console.WriteLine($"Patient reigon set to your reigon {doctorRegion} ");
+                                    Patient newPatient = new Patient(name, username, _password, doctorRegion);
+                                    users.Add(newPatient);
+                                    userSystem.SaveUser(users);
+                                    users = userSystem.LoadUser();//efter jag kört denna loadar jag den nya listan, eftersom jag eventuellt skapat en ny användare.
                               }
                         }
                         break;
-                  case "2":
-                        {
-
-                        }
+                  case '2':
+                        break;
+                  default:
                         break;
             }
-
-
-            // foreach (IUser user in users)
-            // {
-            //       Console.WriteLine($"");
-            // }
       }
-
-
 }
+
+
