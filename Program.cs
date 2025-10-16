@@ -27,91 +27,100 @@ while (running)
             string verify = Console.ReadLine();
 
             if (verify == "h")
+            {
                   // ACTIVE USER = INTE HITTAD.
                   Console.Clear();
-            Console.WriteLine("----- Menu -----");
-            Console.WriteLine("[1] Login\n[2] Register admin\n[3] Register doctor\n[4] Register patient\n[5] Quit\n");
-            switch (Console.ReadLine())
-            {
-                  case "1":
-                        {
-                              Console.Clear();
-                              Console.WriteLine("----------");
-                              Console.WriteLine("Username: ");
-                              string input_username = Console.ReadLine();
-                              Console.WriteLine("Password: ");
-                              string input_password = Console.ReadLine();
-                              foreach (IUser user in users)
+                  Console.WriteLine("----- Menu -----");
+                  Console.WriteLine("[1] Login\n[2] Register admin\n[3] Register doctor\n[4] Register patient\n[5] Quit\n");
+                  switch (Console.ReadLine())
+                  {
+                        case "1":
                               {
-                                    if (user.TryLogin(input_username, input_password))
+                                    Console.Clear();
+                                    Console.WriteLine("----------");
+                                    Console.WriteLine("Username: ");
+                                    string input_username = Console.ReadLine();
+                                    Console.WriteLine("Password: ");
+                                    string input_password = Console.ReadLine();
+                                    foreach (IUser user in users)
                                     {
-                                          active_user = user;
-                                          found = true;
-                                          break;
+                                          if (user.TryLogin(input_username, input_password))
+                                          {
+                                                active_user = user;
+                                                found = true;
+                                                break;
+                                          }
+                                    }
+                                    if (found == false)
+                                    {
+                                          Console.WriteLine("User wasnt found...");
                                     }
                               }
-                              if (found == false)
+                              break;
+                        case "2":
                               {
-                                    Console.WriteLine("User wasnt found...");
+                                    Console.Clear();
+                                    Console.WriteLine("----- Register -----");
+                                    Console.WriteLine("Name: ");
+                                    string input_name = Console.ReadLine();
+                                    Console.WriteLine("Username: ");
+                                    string input_username = Console.ReadLine();
+                                    Console.WriteLine("Password: ");
+                                    string input_password = Console.ReadLine();
+                                    Console.WriteLine("Region: North, East, West, South");
+                                    Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
+                                    users.Add(new Admin(input_name, input_username, input_password, parsedRegion));
+                                    userSystem.SaveUser(users);
                               }
-                        }
-                        break;
-                  case "2":
-                        {
-                              Console.Clear();
-                              Console.WriteLine("----- Register -----");
-                              Console.WriteLine("Name: ");
-                              string input_name = Console.ReadLine();
-                              Console.WriteLine("Username: ");
-                              string input_username = Console.ReadLine();
-                              Console.WriteLine("Password: ");
-                              string input_password = Console.ReadLine();
-                              Console.WriteLine("Region: North, East, West, South");
-                              Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                              users.Add(new Admin(input_name, input_username, input_password, parsedRegion));
-                              userSystem.SaveUser(users);
-                        }
-                        break;
-                  case "3":
-                        {
-                              Console.Clear();
-                              Console.WriteLine("----- Register -----");
-                              Console.WriteLine("Name: ");
-                              string input_name = Console.ReadLine();
-                              Console.WriteLine("Username: ");
-                              string input_username = Console.ReadLine();
-                              Console.WriteLine("Password: ");
-                              string input_password = Console.ReadLine();
-                              Console.WriteLine("Region: North, East, West, South");
-                              Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                              users.Add(new Doctor(input_name, input_username, input_password, parsedRegion));
-                              userSystem.SaveUser(users);
-                        }
-                        break;
-                  case "4":
-                        {
-                              Console.Clear();
-                              Console.WriteLine("----- Register -----");
-                              Console.WriteLine("Name: ");
-                              string input_name = Console.ReadLine();
-                              Console.WriteLine("Username: ");
-                              string input_username = Console.ReadLine();
-                              Console.WriteLine("Password: ");
-                              string input_password = Console.ReadLine();
-                              Console.WriteLine("Region: North, East, West, South");
-                              Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                              users.Add(new Patient(input_name, input_username, input_password, parsedRegion));
-                              userSystem.SaveUser(users);
-                        }
-                        break;
-                  case "5":
-                        {
-                              running = false;
-                        }
-                        break;
-                  default:
-                        continue;
+                              break;
+                        case "3":
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Register -----");
+                                    Console.WriteLine("Name: ");
+                                    string input_name = Console.ReadLine();
+                                    Console.WriteLine("Username: ");
+                                    string input_username = Console.ReadLine();
+                                    Console.WriteLine("Password: ");
+                                    string input_password = Console.ReadLine();
+                                    Console.WriteLine("Region: North, East, West, South");
+                                    Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
+                                    users.Add(new Doctor(input_name, input_username, input_password, parsedRegion));
+                                    userSystem.SaveUser(users);
+                              }
+                              break;
+                        case "4":
+                              {
+                                    Console.Clear();
+                                    Console.WriteLine("----- Register -----");
+                                    Console.WriteLine("Name: ");
+                                    string input_name = Console.ReadLine();
+                                    Console.WriteLine("Username: ");
+                                    string input_username = Console.ReadLine();
+                                    Console.WriteLine("Password: ");
+                                    string input_password = Console.ReadLine();
+                                    Console.WriteLine("Region: North, East, West, South");
+                                    Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
+                                    users.Add(new Patient(input_name, input_username, input_password, parsedRegion));
+                                    userSystem.SaveUser(users);
+                              }
+                              break;
+                        case "5":
+                              {
+                                    running = false;
+                              }
+                              break;
+                        default:
+                              continue;
 
+                  }
+            }
+            else
+            {
+                  Console.WriteLine("You stupid looking machine...");
+                  Console.WriteLine($"where the f*** did you find the letter: {verify}??\nPress ENTER if your stupid ass acually is human...");
+                  Console.ReadLine();
+                  continue;
             }
             Console.ReadLine();
       }
