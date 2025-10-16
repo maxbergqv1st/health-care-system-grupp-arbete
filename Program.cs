@@ -17,8 +17,18 @@ while (running)
 {
       if (active_user == null)
       {
-            // ACTIVE USER = INTE HITTAD.
             Console.Clear();
+            Console.WriteLine("\nVerify that youre not a robot.");
+            Console.WriteLine("\n--------------------");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXX\nXXHXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX");
+            Console.WriteLine("--------------------");
+            Console.WriteLine("\nWrite the odd letter hidden in the board(small letter):");
+
+            string verify = Console.ReadLine();
+
+            if (verify == "h")
+                  // ACTIVE USER = INTE HITTAD.
+                  Console.Clear();
             Console.WriteLine("----- Menu -----");
             Console.WriteLine("[1] Login\n[2] Register admin\n[3] Register doctor\n[4] Register patient\n[5] Quit\n");
             switch (Console.ReadLine())
@@ -112,7 +122,7 @@ while (running)
             Console.WriteLine("Logged in as Patient");
             Console.WriteLine("[1] profile\n[2] Make a appointment \n[3] Show appointments \n[L]logout");
             ConsoleKeyInfo key = Console.ReadKey(true);
-            switch(key.KeyChar)
+            switch (key.KeyChar)
             {
                   case '1':
                         Console.Clear();
@@ -124,7 +134,7 @@ while (running)
                         Console.WriteLine("----- Make a appointment -----");
                         Appointment.MakeAppointment();
                         Console.ReadLine();
-                  
+
 
                         break;
                   case '3':
@@ -146,20 +156,20 @@ while (running)
       else if (active_user.GetType().Name == "Doctor")
       {
             Console.Clear();
-                        // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
+            // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
             Console.WriteLine("logged in as doctor");
             Console.WriteLine("[1] profile \n[2] logout\n[5] add Event\n[3] exit ");
             Console.ReadLine();
             string rl() => Console.ReadLine();
-            switch(Console.ReadLine())
+            switch (Console.ReadLine())
             {
 
                   case "1":
                         Console.WriteLine("----- Show appointments -----");
                         Appointment.ShowAppointments();
                         break;
-                  
+
                   case "2":
                         active_user = null;
                         Console.WriteLine("logged out");
@@ -179,72 +189,171 @@ while (running)
                               Console.ReadLine();
                         }
                         break;
-                  //
+                        //
             }
-            
-            
+
+
       }
       else if (active_user.GetType().Name == "Admin")
+
       {
+
             Console.Clear();
-            //MACKISH ADMIN
-            // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
+
+            //MACKISH ADMIN 
+
+            // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD 
+
             Console.WriteLine("----- Admin Menu -----");
-            Console.WriteLine("[1] manage permissons\n[2] Assign Regions\n[3] Handle Registrations\n[4] Add Locations\n[5] Create Personell Accounts\n[6] View Permissions List");
+
+            Console.WriteLine("[1] manage permissons\n[2] Assign Regions\n[3] Handle Registrations\n[4] Add Locations\n[5] Create Personell Accounts\n[6] View Permissions List\n[0] Logout");
+
             string? input = Console.ReadLine();
-            if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int. 
 
-                  switch ((AdminPermission)choice)//Switchen använder min enum AdminPermission.choice om den inte hittar caset körs default.
+            if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int.  
+
+            {
+
+                  if (choice != 0 && ((Admin)active_user).HasPermission((AdminPermission)choice))
+
                   {
-                        case AdminPermission.ManagePermissions:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- Manage Permissions -----");
-                                    Console.ReadLine();
-                                    break;
-                              }
-                        case AdminPermission.AssignRegions:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- Assign Regions -----");
-                                    Console.ReadLine();
-                                    break;
-                              }
-                        case AdminPermission.HandleRegistrations:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- Handle Registrations -----");
-                                    //Accept
-                                    //Deny
-                                    Console.ReadLine();
-                                    break;
-                              }
-                        case AdminPermission.AddLocations:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- Add Locations -----");
-                                    Console.ReadLine();
-                                    break;
-                              }
 
-                        case AdminPermission.CreatePersonellAccounts:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- Create Personell Accounts -----");
-                                    Console.ReadLine();
-                                    break;
-                              }
-                        case AdminPermission.ViewPermissionsList:
-                              {
-                                    Console.Clear();
-                                    Console.WriteLine("----- View Permissions List -----");
-                                    Console.ReadLine();
+                        Console.WriteLine("Duuude what are you doing here? to acces this you need to be atleast 5ft tall...(and have permission)");
 
-                              }
+                        Console.ReadKey();
 
-
-                              break;
                   }
 
+                  else
+
+                  {
+
+                        switch ((AdminPermission)choice)//Switchen använder min enum AdminPermission.choice om den inte hittar caset körs default. 
+
+                        {
+
+
+
+                              case AdminPermission.None:
+
+                                    {
+
+                                          active_user = null;
+
+                                          Console.WriteLine("You've been logged out.");
+
+                                          Console.ReadLine();
+
+                                          break;
+
+                                    }
+
+                              case AdminPermission.ManagePermissions:
+
+                                    {
+
+                                          Console.Clear();
+
+                                          Console.WriteLine("----- Manage Permissions -----");
+
+                                          Console.WriteLine("Grant or revoke permissions here");
+
+                                          Console.ReadLine();
+
+                                          break;
+
+                                    }
+
+                              case AdminPermission.AssignRegions:
+
+                                    {
+
+                                          Console.Clear();
+
+                                          Console.WriteLine("----- Assign Regions -----");
+
+                                          Console.ReadLine();
+
+                                          break;
+
+                                    }
+
+                              case AdminPermission.HandleRegistrations:
+
+                                    {
+
+                                          Console.Clear();
+
+                                          Console.WriteLine("----- Handle Registrations -----");
+
+                                          Console.WriteLine("Accept or Deny user registration...");
+
+                                          Console.ReadLine();
+
+                                          break;
+
+                                    }
+
+                              case AdminPermission.AddLocations:
+
+                                    {
+
+                                          Console.Clear();
+
+                                          Console.WriteLine("----- Add Locations -----");
+
+                                          Console.ReadLine();
+
+                                          break;
+
+                                    }
+
+
+
+                              case AdminPermission.CreatePersonellAccounts:
+
+                                    {
+
+                                          Console.Clear();
+
+                                          Console.WriteLine("----- Create Personell Accounts -----");
+
+                                          Console.ReadLine();
+
+                                          break;
+
+                                    }
+
+                              case AdminPermission.ViewPermissionsList:
+
+                                    {
+
+                                          Console.Clear();
+
+                                          Console.WriteLine("----- View Permissions List -----");
+
+                                          Console.ReadLine();
+
+
+
+
+
+                                    }
+
+
+
+
+
+                                    break;
+
+                        }
+
+                  }
+
+
+
+            }
+
       }
+
 }
