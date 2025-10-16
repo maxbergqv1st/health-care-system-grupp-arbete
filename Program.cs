@@ -168,40 +168,36 @@ while (running)
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
             Console.WriteLine("logged in as doctor");
-            Console.WriteLine("[1] profile \n[2] logout\n[5] add Event\n[3] exit ");
-            Console.ReadLine();
-            string rl() => Console.ReadLine();
-            switch (Console.ReadLine())
+            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event \n[L] logout ");
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            switch (key.KeyChar)
             {
 
-                  case "1":
+                  case '1':
+                        Console.WriteLine("----- Add appointments -----");
+                        Appointment.MakeAppointment();
+                        break;
+
+                  case '2':
                         Console.WriteLine("----- Show appointments -----");
                         Appointment.ShowAppointments();
                         break;
 
-                  case "2":
+                  case '3':
+                        AddEvent.AddEvent(active_user); // SaveEventJournal.cs
+                        
+                        break;
+
+                  case 'L':
+                  case 'l':
                         active_user = null;
                         Console.WriteLine("logged out");
-                        Console.ReadKey();
                         break;
-                  case "3":
-                        running = false;
+
+                  default:
+                        Console.WriteLine("Unvalid input...");
                         break;
-                  case "4":
-                        Console.Clear();
-                        Console.ReadLine();
-                        break;
-                  //
-                  case "5":
-                        {
-                              AddEvent.AddEvent(); // SaveEventJournal.cs
-                              Console.ReadLine();
-                        }
-                        break;
-                        //
             }
-
-
       }
       else if (active_user.GetType().Name == "Admin")
       {
