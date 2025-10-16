@@ -195,165 +195,84 @@ while (running)
 
       }
       else if (active_user.GetType().Name == "Admin")
-
       {
-
             Console.Clear();
-
-            //MACKISH ADMIN 
-
-            // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD 
-
+            //MACKISH ADMIN
+            // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.WriteLine("----- Admin Menu -----");
-
             Console.WriteLine("[1] manage permissons\n[2] Assign Regions\n[3] Handle Registrations\n[4] Add Locations\n[5] Create Personell Accounts\n[6] View Permissions List\n[0] Logout");
-
             string? input = Console.ReadLine();
-
-            if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int.  
-
+            if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int. 
             {
-
                   if (choice != 0 && ((Admin)active_user).HasPermission((AdminPermission)choice))
-
                   {
-
                         Console.WriteLine("Duuude what are you doing here? to acces this you need to be atleast 5ft tall...(and have permission)");
-
                         Console.ReadKey();
-
                   }
-
                   else
-
                   {
-
-                        switch ((AdminPermission)choice)//Switchen använder min enum AdminPermission.choice om den inte hittar caset körs default. 
-
+                        switch ((AdminPermission)choice)//Switchen använder min enum AdminPermission.choice om den inte hittar caset körs default.
                         {
 
-
-
                               case AdminPermission.None:
-
                                     {
-
                                           active_user = null;
-
                                           Console.WriteLine("You've been logged out.");
-
                                           Console.ReadLine();
-
                                           break;
-
                                     }
-
                               case AdminPermission.ManagePermissions:
-
                                     {
-
                                           Console.Clear();
-
                                           Console.WriteLine("----- Manage Permissions -----");
-
                                           Console.WriteLine("Grant or revoke permissions here");
-
                                           Console.ReadLine();
-
                                           break;
-
                                     }
-
                               case AdminPermission.AssignRegions:
-
                                     {
-
                                           Console.Clear();
-
                                           Console.WriteLine("----- Assign Regions -----");
-
                                           Console.ReadLine();
-
                                           break;
-
                                     }
-
                               case AdminPermission.HandleRegistrations:
-
                                     {
-
                                           Console.Clear();
-
                                           Console.WriteLine("----- Handle Registrations -----");
-
                                           Console.WriteLine("Accept or Deny user registration...");
-
                                           Console.ReadLine();
-
                                           break;
-
                                     }
-
                               case AdminPermission.AddLocations:
-
                                     {
-
                                           Console.Clear();
-
                                           Console.WriteLine("----- Add Locations -----");
-
                                           Console.ReadLine();
-
                                           break;
-
                                     }
-
-
 
                               case AdminPermission.CreatePersonellAccounts:
-
                                     {
-
                                           Console.Clear();
-
                                           Console.WriteLine("----- Create Personell Accounts -----");
-
                                           Console.ReadLine();
-
                                           break;
-
                                     }
-
                               case AdminPermission.ViewPermissionsList:
-
                                     {
-
                                           Console.Clear();
-
                                           Console.WriteLine("----- View Permissions List -----");
-
                                           Console.ReadLine();
 
 
-
-
-
                                     }
-
-
-
 
 
                                     break;
-
                         }
-
                   }
 
-
-
             }
-
       }
-
 }
