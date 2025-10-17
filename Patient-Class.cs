@@ -4,15 +4,17 @@ namespace App;
 
 class Patient : IUser
 {
-    public string Name { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
     public string Username { get; set; }
     public string _password { get; set; }
 
     public Region UserStatus { get; set; }
 
-    public Patient(string name, string username, string password, Region region)
+    public Patient(string firstname, string lastname, string username, string password, Region region)
     {
-        Name = name;
+        FirstName = firstname;
+        LastName = lastname;
         Username = username;
         _password = password;
         UserStatus = region;

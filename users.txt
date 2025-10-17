@@ -1,6 +1,2 @@
-Admin,Mackan,mackish,pass,North
-Patient,max,madmax,pass,East
-Doctor,Lucas,lulle,pass,West
-Admin,Dusan,dus,pass,South
-Patient,test,testing,pass,North
-Doctor,f,f,f,North
+Doctor,kevin,diyabanza,kev,abc,North
+Doctor,,,kev,,North

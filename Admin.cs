@@ -16,15 +16,17 @@ public enum AdminPermission
 class Admin : IUser
 {
 
-  public string Name { get; set; } //= ""; //Tomt namn för admin, måste ha ett namn för att hantera data till users.txt.
+  public string FirstName { get; set; } //= ""; //Tomt namn för admin, måste ha ett namn för att hantera data till users.txt.
+  public string LastName { get; set; } //= "";
   public string Username { get; set; }
   public string _password { get; set; }
   public Region UserStatus { get; set; }
 
   List<AdminPermission> permissions = new();
-  public Admin(string name, string username, string password, Region region)
+  public Admin(string firstname, string lastname, string username, string password, Region region)
   {
-    Name = name;
+    FirstName = firstname;
+    LastName = lastname;
     Username = username;
     _password = password;
     UserStatus = region;

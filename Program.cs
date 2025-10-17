@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Design;
+using System.Reflection.Metadata;
 using App;
 
 SaveUserSystem userSystem = new();
@@ -35,9 +36,10 @@ while (running)
                                           break;
                                     }
                               }
-                              if (found = false)
+                              if (found == false)
                               {
                                     Console.WriteLine("User wasnt found...");
+                                    Console.ReadLine();
                               }
                         }
                         break;
@@ -45,15 +47,27 @@ while (running)
                         {
                               Console.Clear();
                               Console.WriteLine("----- Register -----");
-                              Console.WriteLine("Name: ");
-                              string input_name = Console.ReadLine();
                               Console.WriteLine("Username: ");
                               string input_username = Console.ReadLine();
+                              foreach (IUser user in users)
+                              {
+                                    if (input_username == user.Username)
+                                    {
+                                          Console.Clear();
+                                          System.Console.WriteLine("Username already exists.");
+                                          Console.ReadLine();
+                                          continue;
+                                    }
+                              }
+                              Console.WriteLine("First name: ");
+                              string input_firstname = Console.ReadLine();
+                              Console.WriteLine("Last name: ");
+                              string input_lastname = Console.ReadLine();
                               Console.WriteLine("Password: ");
                               string input_password = Console.ReadLine();
                               Console.WriteLine("Region: North, East, West, South");
                               Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                              users.Add(new Admin(input_name, input_username, input_password, parsedRegion));
+                              users.Add(new Admin(input_firstname, input_lastname, input_username, input_password, parsedRegion));
                               userSystem.SaveUser(users);
                         }
                         break;
@@ -61,15 +75,27 @@ while (running)
                         {
                               Console.Clear();
                               Console.WriteLine("----- Register -----");
-                              Console.WriteLine("Name: ");
-                              string input_name = Console.ReadLine();
                               Console.WriteLine("Username: ");
                               string input_username = Console.ReadLine();
+                              foreach (IUser user in users)
+                              {
+                                    if (input_username == user.Username)
+                                    {
+                                          Console.Clear();
+                                          System.Console.WriteLine("Username already exists.");
+                                          Console.ReadLine();
+                                          continue;
+                                    }
+                              }
+                              Console.WriteLine("First name: ");
+                              string input_firstname = Console.ReadLine();
+                              Console.WriteLine("Last name: ");
+                              string input_lastname = Console.ReadLine();
                               Console.WriteLine("Password: ");
                               string input_password = Console.ReadLine();
                               Console.WriteLine("Region: North, East, West, South");
                               Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                              users.Add(new Doctor(input_name, input_username, input_password, parsedRegion));
+                              users.Add(new Doctor(input_firstname, input_lastname, input_username, input_password, parsedRegion));
                               userSystem.SaveUser(users);
                         }
                         break;
@@ -77,15 +103,27 @@ while (running)
                         {
                               Console.Clear();
                               Console.WriteLine("----- Register -----");
-                              Console.WriteLine("Name: ");
-                              string input_name = Console.ReadLine();
                               Console.WriteLine("Username: ");
                               string input_username = Console.ReadLine();
+                              foreach (IUser user in users)
+                              {
+                                    if (input_username == user.Username)
+                                    {
+                                          Console.Clear();
+                                          System.Console.WriteLine("Username already exists.");
+                                          Console.ReadLine();
+                                          continue;
+                                    }
+                              }
+                              Console.WriteLine("First name: ");
+                              string input_firstname = Console.ReadLine();
+                              Console.WriteLine("Last name: ");
+                              string input_lastname = Console.ReadLine();
                               Console.WriteLine("Password: ");
                               string input_password = Console.ReadLine();
                               Console.WriteLine("Region: North, East, West, South");
                               Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                              users.Add(new Patient(input_name, input_username, input_password, parsedRegion));
+                              users.Add(new Patient(input_firstname, input_lastname, input_username, input_password, parsedRegion));
                               userSystem.SaveUser(users);
                         }
                         break;
@@ -98,7 +136,6 @@ while (running)
                         continue;
 
             }
-            Console.ReadLine();
       }
       else if (active_user.GetType().Name == "Patient")
       {
@@ -122,10 +159,10 @@ while (running)
 
                   case "1":
                   
-                        Console.WriteLine("your profile:");
+                        Console.WriteLine("Your profile:");
                         foreach(IUser user in users)
                         {
-                              Console.WriteLine($"{user.Name}");
+                              Console.WriteLine($"{user.FirstName} {user.LastName}");
                         }
                         Console.WriteLine($"du är i ");
                         rl();

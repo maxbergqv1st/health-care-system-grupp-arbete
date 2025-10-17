@@ -7,7 +7,7 @@ public class SaveUserSystem
             List<string> lines = new List<string>();
             foreach (IUser user in users)
             {
-                  lines.Add($"{user.GetType().Name},{user.Name},{user.Username},{user._password},{user.UserStatus}");
+                  lines.Add($"{user.GetType().Name},{user.FirstName},{user.LastName},{user.Username},{user._password},{user.UserStatus}");
             }
             File.WriteAllLines("users.txt", lines); 
       }
@@ -22,24 +22,25 @@ public class SaveUserSystem
             foreach (string line in lines)
             {
                   string[] split = line.Split(",");
-                  if (split.Length == 5)
+                  if (split.Length == 6)
                   {
                         string type = split[0];
-                        string name = split[1];
-                        string username = split[2];
-                        string _password = split[3];
-                        Enum.TryParse(split[4], out Region eRegion);
+                        string firstname = split[1];
+                        string lastname = split[2];
+                        string username = split[3];
+                        string _password = split[4];
+                        Enum.TryParse(split[5], out Region eRegion);
                         if (type == "Patient")
                         {
-                              users.Add(new Patient(name, username, _password, eRegion));
+                              users.Add(new Patient(firstname, lastname, username, _password, eRegion));
                         }
                         else if (type == "Doctor")
                         {
-                              users.Add(new Doctor(name, username, _password, eRegion));
+                              users.Add(new Doctor(firstname, lastname, username, _password, eRegion));
                         }
                         else if (type == "Admin")
                         {
-                              users.Add(new Admin(name, username, _password, eRegion));
+                              users.Add(new Admin(firstname, lastname, username, _password, eRegion));
                         }
                   }
             }
