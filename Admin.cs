@@ -22,6 +22,7 @@ class Admin : IUser
   public string _password { get; set; }
   public Region UserStatus { get; set; }
 
+
   List<AdminPermission> permissions = new();
   public Admin(string firstname, string lastname, string username, string password, Region region)
   {
@@ -36,6 +37,28 @@ class Admin : IUser
   {
     return username == Username && password == _password; //Skickar username och password till metoden. Returnar true eller false.
   }
+
+  public bool HasPermission(AdminPermission permission)
+  {
+    return permissions.Contains(permission);
+  }
+
+  public void GrantPermission(AdminPermission permission)
+  {
+    if (!permissions.Contains(permission))
+      permissions.Remove(permission);
+  }
+
+  public void RevokePermission(AdminPermission permission)
+  {
+    permissions.Remove(permission);
+  }
+
+  public List<AdminPermission> GetAdminPermissions()
+  {
+    return permissions;
+  }
+
 }
 
 /*
