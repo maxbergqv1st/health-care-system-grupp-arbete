@@ -9,24 +9,24 @@ Event AddEvent = new();
 AppointmentFather Appointment = new();
 //
 
-bool found = false;
 bool running = true;
 IUser active_user = null;
 
 while (running)
 {
+      bool found = false;
       if (active_user == null)
       {
             Console.Clear();
-            Console.WriteLine("\nVerify that youre not a robot.");
+            Console.WriteLine("Verify that youre not a robot.");
             Console.WriteLine("\n--------------------");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXX\nXXHXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX");
             Console.WriteLine("--------------------");
-            Console.WriteLine("\nWrite the odd letter hidden in the board(small letter):");
+            Console.WriteLine("\nWrite the odd letter hidden in the board:");
 
             string verify = Console.ReadLine();
 
-            if (verify == "h")
+            if (verify.ToLower() == "h")
             {
                   // ACTIVE USER = INTE HITTAD.
                   Console.Clear();
@@ -54,6 +54,8 @@ while (running)
                                     if (found == false)
                                     {
                                           Console.WriteLine("User wasnt found...");
+                                          Console.ReadLine();
+                                          continue;
                                     }
                               }
                               break;
@@ -63,6 +65,15 @@ while (running)
                                     Console.WriteLine("----- Register -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    foreach (IUser user in users)
+                                    {
+                                          if (input_username == user.Username)
+                                          {
+                                                System.Console.WriteLine("Username already exists.");
+                                                Console.ReadLine();
+                                                continue;
+                                          }
+                                    }
                                     Console.WriteLine("First name: ");
                                     string input_firstname = Console.ReadLine();
                                     Console.WriteLine("Last name: ");
@@ -81,6 +92,15 @@ while (running)
                                     Console.WriteLine("----- Register -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    foreach (IUser user in users)
+                                    {
+                                          if (input_username == user.Username)
+                                          {
+                                                System.Console.WriteLine("Username already exists.");
+                                                Console.ReadLine();
+                                                continue;
+                                          }
+                                    }
                                     Console.WriteLine("First name: ");
                                     string input_firstname = Console.ReadLine();
                                     Console.WriteLine("Last name: ");
@@ -99,6 +119,15 @@ while (running)
                                     Console.WriteLine("----- Register -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    foreach (IUser user in users)
+                                    {
+                                          if (input_username == user.Username)
+                                          {
+                                                System.Console.WriteLine("Username already exists.");
+                                                Console.ReadLine();
+                                                continue;
+                                          }
+                                    }
                                     Console.WriteLine("First name: ");
                                     string input_firstname = Console.ReadLine();
                                     Console.WriteLine("Last name: ");
@@ -123,12 +152,12 @@ while (running)
             }
             else
             {
+                  Console.Clear();
                   Console.WriteLine("You stupid looking machine...");
                   Console.WriteLine($"where the f*** did you find the letter: {verify}??\nPress ENTER if your stupid ass acually is human...");
                   Console.ReadLine();
                   continue;
             }
-            Console.ReadLine();
       }
       else if (active_user.GetType().Name == "Patient")
       {
