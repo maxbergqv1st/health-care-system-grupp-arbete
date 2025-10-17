@@ -56,7 +56,7 @@ public class Event
                                     {
                                           if (input_lastname == matched.LastName) //SKA VARA MATCHED.LASTNAME
                                           {
-
+                                                Console.WriteLine();
                                           }
                                     }
                               }
