@@ -30,18 +30,13 @@ public class Event
                         {
                               Console.Clear();
                               Console.WriteLine("----- Add Event ------");
-                              // Console.WriteLine("Description: ");
-                              // Console.WriteLine("Document");
-                              // Console.WriteLine("Location");
-
-
                               Console.WriteLine("Patient name: ");
                               string? input_new_patient = Console.ReadLine();
                               List<IUser> matchedUsers = new();
                               Region doctorRegion = active_user.UserStatus;
                               foreach (IUser user in users)
                               {
-                                    if (input_new_patient == user.Name && doctorRegion == user.UserStatus)
+                                    if (input_new_patient == user.FirstName && doctorRegion == user.UserStatus)
                                     {
                                           matchedUsers.Add(user);
                                     }
@@ -53,15 +48,15 @@ public class Event
                                     found = true;
                                     foreach (IUser matched in matchedUsers)
                                     {
-                                          Console.WriteLine($"Patient {matched.Name} [Lastname] {matched.Username} {matched.UserStatus}");
+                                          Console.WriteLine($"Patient {matched.FirstName} {matched.LastName} {matched.Username} {matched.UserStatus}");
                                     }
                                     Console.WriteLine("Lastname: ");
-                                    string input_lastname = Console.ReadLine();
+                                    string? input_lastname = Console.ReadLine();
                                     foreach (IUser matched in matchedUsers)
                                     {
-                                          if (input_lastname == matched.Name) //SKA VARA MATCHED.LASTNAME
+                                          if (input_lastname == matched.LastName) //SKA VARA MATCHED.LASTNAME
                                           {
-
+                                                Console.WriteLine();
                                           }
                                     }
                               }
@@ -72,14 +67,14 @@ public class Event
                                     Console.Clear();
                                     Console.WriteLine($"Patient name: {input_new_patient} ");
                                     string? name = input_new_patient;
-                                    Console.WriteLine("Patient lastname: ");
+                                    Console.WriteLine($"Patient lastname:");
                                     string? lastname = Console.ReadLine();
                                     Console.WriteLine("Patient username: ");
                                     string? username = Console.ReadLine();
                                     Console.WriteLine("Patient password: ");
                                     string? _password = Console.ReadLine();
                                     Console.WriteLine($"Patient reigon set to your reigon {doctorRegion} ");
-                                    Patient newPatient = new Patient(name, username, _password, doctorRegion);
+                                    Patient newPatient = new Patient(name, lastname, username, _password, doctorRegion);
                                     users.Add(newPatient);
                                     userSystem.SaveUser(users);
                                     users = userSystem.LoadUser();//efter jag kört denna loadar jag den nya listan, eftersom jag eventuellt skapat en ny användare.
