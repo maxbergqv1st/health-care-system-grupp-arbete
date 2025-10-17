@@ -6,7 +6,7 @@ public class SaveUserSystem
       {
             List<string> lines = new List<string>();
             foreach (IUser user in users)
-            {
+            {                                // GetType().Name är satt för att hämta namnet på classen. 
                   lines.Add($"{user.GetType().Name},{user.FirstName},{user.LastName},{user.Username},{user._password},{user.UserStatus}");
             }
             File.WriteAllLines("users.txt", lines); 
