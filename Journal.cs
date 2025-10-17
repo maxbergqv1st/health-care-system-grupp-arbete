@@ -1,3 +1,5 @@
+using System.Reflection.Metadata;
+
 namespace App;
 
 
@@ -9,14 +11,26 @@ public class Event
       {
             users = userSystem.LoadUser();
       }
-      public class PatientEvent
+      public class Journal
       {
             public string? OwnerUsername { get; set; } // IUser.Username, make it so no username is the same
             public string? FirstName { get; set; }
             public string? LastName { get; set; }
             public string? Description { get; set; }
             public string? Document { get; set; }
+            public DateTime Date { get; set; }
             public Region Location { get; set; }
+
+            public Journal(string ownerUsername, string firstName, string lastName, string description, string document, Region location)
+            {
+                  OwnerUsername = ownerUsername;
+                  FirstName = firstName;
+                  LastName = lastName;
+                  Description = description;
+                  Document = document;
+                  Location = location;
+                  Date = DateTime.Now;
+            }
       }
       List<IUser> users = new();
 
