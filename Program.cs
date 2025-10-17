@@ -61,15 +61,17 @@ while (running)
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- Register -----");
-                                    Console.WriteLine("Name: ");
-                                    string input_name = Console.ReadLine();
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    Console.WriteLine("First name: ");
+                                    string input_firstname = Console.ReadLine();
+                                    Console.WriteLine("Last name: ");
+                                    string input_lastname = Console.ReadLine();
                                     Console.WriteLine("Password: ");
                                     string input_password = Console.ReadLine();
                                     Console.WriteLine("Region: North, East, West, South");
                                     Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                                    users.Add(new Admin(input_name, input_username, input_password, parsedRegion));
+                                    users.Add(new Admin(input_firstname, input_lastname, input_username, input_password, parsedRegion));
                                     userSystem.SaveUser(users);
                               }
                               break;
@@ -77,15 +79,17 @@ while (running)
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- Register -----");
-                                    Console.WriteLine("Name: ");
-                                    string input_name = Console.ReadLine();
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    Console.WriteLine("First name: ");
+                                    string input_firstname = Console.ReadLine();
+                                    Console.WriteLine("Last name: ");
+                                    string input_lastname = Console.ReadLine();
                                     Console.WriteLine("Password: ");
                                     string input_password = Console.ReadLine();
                                     Console.WriteLine("Region: North, East, West, South");
                                     Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                                    users.Add(new Doctor(input_name, input_username, input_password, parsedRegion));
+                                    users.Add(new Doctor(input_firstname, input_lastname, input_username, input_password, parsedRegion));
                                     userSystem.SaveUser(users);
                               }
                               break;
@@ -93,15 +97,17 @@ while (running)
                               {
                                     Console.Clear();
                                     Console.WriteLine("----- Register -----");
-                                    Console.WriteLine("Name: ");
-                                    string input_name = Console.ReadLine();
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    Console.WriteLine("First name: ");
+                                    string input_firstname = Console.ReadLine();
+                                    Console.WriteLine("Last name: ");
+                                    string input_lastname = Console.ReadLine();
                                     Console.WriteLine("Password: ");
                                     string input_password = Console.ReadLine();
                                     Console.WriteLine("Region: North, East, West, South");
                                     Enum.TryParse(Console.ReadLine(), out Region parsedRegion); //Enum.TryParse(Console.ReadLine(), true, out Region parsedRegion);
-                                    users.Add(new Patient(input_name, input_username, input_password, parsedRegion));
+                                    users.Add(new Patient(input_firstname, input_lastname, input_username, input_password, parsedRegion));
                                     userSystem.SaveUser(users);
                               }
                               break;
