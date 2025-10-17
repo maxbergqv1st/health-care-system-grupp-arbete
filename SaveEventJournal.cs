@@ -74,7 +74,16 @@ public class Event
                                     {
                                           case 'A':
                                           case 'a':
+                                                Console.WriteLine("MAKE A JOURNAL TO PATIENT");
+                                                Console.WriteLine("Title: ");
 
+                                                Console.WriteLine("Description: ");
+
+                                                Console.WriteLine("Medication: ");
+
+                                                Console.WriteLine("Date");
+
+                                                //.Add JOURNAL SPARA TILL LISTA.
                                                 break;
                                           case 'D':
                                           case 'd':
