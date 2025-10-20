@@ -221,6 +221,10 @@ while (running)
 
                   case '3':
                         AddEvent.AddEvent(active_user); // SaveEventJournal.cs
+
+                        break;
+                  case '4':
+                         AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
                         
                         break;
 
