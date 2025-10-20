@@ -45,11 +45,11 @@ public class Event
             Console.Clear();
             Console.WriteLine($"----- Journal -----");
             SaveJournalSystem saveSystem = new SaveJournalSystem();
-            List<Journal> allJounrals = saveSystem.LoadJournal();
+            List<Journal> AllJournals = saveSystem.LoadJournal();
 
             if (active_user.GetType().Name == "Patient")
             {
-                  foreach(Journal j in allJounrals)
+                  foreach(Journal j in AllJournals)
                   {
                         if (active_user.Username == j.OwnerUsername) // Kollar om active username är samma som OwnerUsername i journal.txt
                         {
@@ -65,7 +65,29 @@ public class Event
             }
             if(active_user.GetType().Name == "Doctor")
             {
-                  Console.WriteLine();
+                  Console.WriteLine("[1] Region Journals");
+                  Console.WriteLine("[2] Journal related to you");
+                  ConsoleKeyInfo key = Console.ReadKey(true);
+                  switch(key.KeyChar)
+                  {
+                        case '1':
+                              for (int i = 1; i <= AllJournals.Count; ++i)
+                              {
+                                    Journal j = AllJournals[i];
+                                    Console.WriteLine($"[{i}] - {j.FirstName} {j.LastName} ");
+                              }
+                              
+                              foreach(Journal j in AllJournals)
+                              {
+                                    Console.WriteLine($"Patient: {j.FirstName} {j.LastName} ");
+                                    Console.WriteLine($"Document: {j.Document} ");
+                                    Console.WriteLine($"Date: {j.Date} ");
+                                    Console.WriteLine($"Region: {j.Location} ");
+                                    Console.WriteLine($"Doctor: {j.Doctor}");
+                              }
+                              break;
+                  }
+
             }
             Console.ReadLine();
 
@@ -133,6 +155,9 @@ public class Event
                                                 string PatientFirstName = selectedPatient.FirstName;
                                                 string PatientLastName = selectedPatient.LastName;
                                                 string DoctorToPatient = active_user.FirstName;
+                                                Console.Clear();
+                                                Console.WriteLine("----- Make a journal -----");
+                                                Console.WriteLine($"Patient {selectedPatient.FirstName} {selectedPatient.LastName}");
                                                 Console.WriteLine("Title: ");
                                                 string title = Console.ReadLine();
                                                 Console.WriteLine("Description: ");
