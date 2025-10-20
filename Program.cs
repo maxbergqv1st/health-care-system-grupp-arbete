@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Design;
+using System.Security;
 using App;
 
 SaveUserSystem userSystem = new();
@@ -191,7 +192,7 @@ while (running)
 
                   case '3':
                         AddEvent.AddEvent(active_user); // SaveEventJournal.cs
-                        
+
                         break;
 
                   case 'L':
@@ -237,6 +238,11 @@ while (running)
                                           Console.Clear();
                                           Console.WriteLine("----- Manage Permissions -----");
                                           Console.WriteLine("Grant or revoke permissions here");
+                                          foreach (var user in users)
+                                                if (user is Admin admin)
+                                                {
+                                                      Console.WriteLine($"{admin.Username} has permissions: {HasPermission()}");
+                                                }
                                           Console.ReadLine();
                                           break;
                                     }
@@ -274,6 +280,7 @@ while (running)
                                     {
                                           Console.Clear();
                                           Console.WriteLine("----- View Permissions List -----");
+                                          //Läg in HasPermission här, tror jag..
                                           Console.ReadLine();
 
 
