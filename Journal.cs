@@ -71,13 +71,13 @@ public class Event
                   switch(key.KeyChar)
                   {
                         case '1':
-                              for (int i = 1; i <= AllJournals.Count; ++i)
-                              {
-                                    Journal j = AllJournals[i];
-                                    Console.WriteLine($"[{i}] - {j.FirstName} {j.LastName} ");
-                              }
-                              
-                              foreach(Journal j in AllJournals)
+                              // for (int i = 1; i <= AllJournals.Count; ++i)
+                              // {
+                              //       Journal j = AllJournals[i];
+                              //       Console.WriteLine($"[{i}] - {j.FirstName} {j.LastName} ");
+                              // }
+
+                              foreach (Journal j in AllJournals)
                               {
                                     Console.WriteLine($"Patient: {j.FirstName} {j.LastName} ");
                                     Console.WriteLine($"Document: {j.Document} ");
@@ -85,6 +85,7 @@ public class Event
                                     Console.WriteLine($"Region: {j.Location} ");
                                     Console.WriteLine($"Doctor: {j.Doctor}");
                               }
+                              Console.ReadLine();
                               break;
                   }
 

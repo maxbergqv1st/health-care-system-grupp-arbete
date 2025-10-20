@@ -204,7 +204,7 @@ while (running)
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
             Console.WriteLine("logged in as doctor");
-            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event \n[L] logout ");
+            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event\n[4] Journals\n[L] logout ");
             ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
             {
