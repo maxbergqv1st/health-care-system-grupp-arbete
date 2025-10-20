@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Reflection.Metadata;
 
 namespace App;
@@ -8,16 +9,18 @@ public class Journal
             public string? OwnerUsername { get; set; } // IUser.Username, make it so no username is the same
             public string? FirstName { get; set; }
             public string? LastName { get; set; }
+            public string? Doctor { get; set; }
             public string? Description { get; set; }
             public string? Document { get; set; }
             public DateTime Date { get; set; }
             public Region Location { get; set; }
 
-            public Journal(string ownerUsername, string firstName, string lastName, string description, string document, DateTime date, Region location)
+            public Journal(string ownerUsername, string firstName, string lastName, string doctor, string description, string document, DateTime date, Region location)
             {
                   OwnerUsername = ownerUsername;
                   FirstName = firstName;
                   LastName = lastName;
+                  Doctor = doctor;
                   Description = description;
                   Document = document;
                   Location = location;
@@ -33,14 +36,37 @@ public class Event
       }
       
       List<IUser> users = new();
-      List<Journal> journal = new();
+      List<Journal> journal = new();// dont know if using annymore,
 
       bool found = false;
 
       public void ShowJournal(IUser active_user)
       {
             Console.Clear();
-            Console.WriteLine("SHOW JOURNAL");
+            Console.WriteLine($"----- Journal -----");
+            SaveJournalSystem saveSystem = new SaveJournalSystem();
+            List<Journal> allJounrals = saveSystem.LoadJournal();
+
+            if (active_user.GetType().Name == "Patient")
+            {
+                  foreach(Journal j in allJounrals)
+                  {
+                        if (active_user.Username == j.OwnerUsername) // Kollar om active username är samma som OwnerUsername i journal.txt
+                        {
+                              Console.WriteLine($"Patient: {j.FirstName} {j.LastName} ");
+                              Console.WriteLine($"Document: {j.Document} ");
+                              Console.WriteLine($"Date: {j.Date} ");
+                              Console.WriteLine($"Region: {j.Location} ");
+                              Console.WriteLine($"Doctor: {j.Doctor}");
+
+
+                        }
+                  }
+            }
+            if(active_user.GetType().Name == "Doctor")
+            {
+                  Console.WriteLine();
+            }
             Console.ReadLine();
 
       }
@@ -106,6 +132,7 @@ public class Event
                                                 string PatientUsername = selectedPatient.Username;
                                                 string PatientFirstName = selectedPatient.FirstName;
                                                 string PatientLastName = selectedPatient.LastName;
+                                                string DoctorToPatient = active_user.FirstName;
                                                 Console.WriteLine("Title: ");
                                                 string title = Console.ReadLine();
                                                 Console.WriteLine("Description: ");
@@ -118,6 +145,7 @@ public class Event
                                                       PatientUsername,
                                                       PatientFirstName,
                                                       PatientLastName,
+                                                      DoctorToPatient,
                                                       title,
                                                       description,
                                                       now,
