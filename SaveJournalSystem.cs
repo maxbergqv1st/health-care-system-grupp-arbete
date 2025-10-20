@@ -29,8 +29,8 @@ public class SaveJournalSystem
                         string lastname = split[2];
                         string description = split[3];
                         string document = split[4];
-                        string date = split[5];
-                        string location = split[6];
+                        DateTime date = DateTime.Parse(split[5]); // parsar direkt, bör aldrig bli fel då man själv inte skriver in ett datum. 
+                        Region location = Enum.Parse<Region> (split[6]);// konverterar den till enum
                   
                   Journal journal = new Journal(owner, firstname, lastname, description, document, date, location);
                         journals.Add(journal);

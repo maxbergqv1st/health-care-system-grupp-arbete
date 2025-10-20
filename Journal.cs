@@ -13,7 +13,7 @@ public class Journal
             public DateTime Date { get; set; }
             public Region Location { get; set; }
 
-            public Journal(string ownerUsername, string firstName, string lastName, string description, string document, Region location)
+            public Journal(string ownerUsername, string firstName, string lastName, string description, string document, DateTime date, Region location)
             {
                   OwnerUsername = ownerUsername;
                   FirstName = firstName;
@@ -21,7 +21,7 @@ public class Journal
                   Description = description;
                   Document = document;
                   Location = location;
-                  Date = DateTime.Now;
+                  Date = date;
             }
       }
 public class Event
