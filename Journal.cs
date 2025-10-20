@@ -3,15 +3,7 @@ using System.Reflection.Metadata;
 namespace App;
 
 
-
-public class Event
-{
-      SaveUserSystem userSystem = new();
-      public Event()
-      {
-            users = userSystem.LoadUser();
-      }
-      public class Journal
+public class Journal
       {
             public string? OwnerUsername { get; set; } // IUser.Username, make it so no username is the same
             public string? FirstName { get; set; }
@@ -32,7 +24,16 @@ public class Event
                   Date = DateTime.Now;
             }
       }
+public class Event
+{
+      SaveUserSystem userSystem = new();
+      public Event()
+      {
+            users = userSystem.LoadUser();
+      }
+      
       List<IUser> users = new();
+      List<Journal> journal = new();
 
       bool found = false;
       public void AddEvent(IUser active_user)
@@ -68,7 +69,7 @@ public class Event
                                     }
                                     Console.WriteLine("Lastname: ");
                                     string? input_lastname = Console.ReadLine();
-                                     List<IUser> matchedUsersLastname = new();
+                                    List<IUser> matchedUsersLastname = new();
                                     foreach (IUser matched in matchedUsers)
                                     {
                                           if (input_lastname == matched.LastName) //SKA VARA MATCHED.LASTNAME
