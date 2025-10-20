@@ -36,6 +36,14 @@ public class Event
       List<Journal> journal = new();
 
       bool found = false;
+
+      public void ShowJournal(IUser active_user)
+      {
+            Console.Clear();
+            Console.WriteLine("SHOW JOURNAL");
+            Console.ReadLine();
+
+      }
       public void AddEvent(IUser active_user)
       {
             Console.Clear();
@@ -115,6 +123,11 @@ public class Event
                                                       now,
                                                       selectedPatient.UserStatus
                                                 );
+                                                journal.Add(newJournal);
+                                                SaveJournalSystem saveSystem = new SaveJournalSystem();
+                                                saveSystem.SaveJournal(journal);
+                                                Console.WriteLine("Journal saved successfully!");
+                                                //TODO, add some else {} scopes if unvalid...
                                                 break;
                                           case 'D':
                                           case 'd':

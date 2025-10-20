@@ -171,6 +171,7 @@ while (running)
                   case '1':
                         Console.Clear();
                         Console.WriteLine("Profile");
+                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
                         Console.ReadLine();
                         break;
                   case '2':
