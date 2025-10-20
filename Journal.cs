@@ -70,6 +70,7 @@ public class Event
                                     Console.WriteLine("Lastname: ");
                                     string? input_lastname = Console.ReadLine();
                                     List<IUser> matchedUsersLastname = new();
+                                    List<IUser> selectedUser = null;
                                     foreach (IUser matched in matchedUsers)
                                     {
                                           if (input_lastname == matched.LastName) //SKA VARA MATCHED.LASTNAME
@@ -82,23 +83,38 @@ public class Event
                                                 }
                                           }
                                     }
+
                                     Console.WriteLine("Is this the right patient");
                                     Console.WriteLine("[A] accept | [D] denie");
+                                    
                                     ConsoleKeyInfo key2 = Console.ReadKey(true);
                                     switch (key2.KeyChar)
                                     {
                                           case 'A':
                                           case 'a':
+                                                IUser selectedPatient = matchedUsersLastname[0];
+                                                DateTime now = DateTime.Now;
                                                 Console.WriteLine("MAKE A JOURNAL TO PATIENT");
+                                                string PatientUsername = selectedPatient.Username;
+                                                string PatientFirstName = selectedPatient.FirstName;
+                                                string PatientLastName = selectedPatient.LastName;
                                                 Console.WriteLine("Title: ");
-
+                                                string title = Console.ReadLine();
                                                 Console.WriteLine("Description: ");
-
+                                                string description = Console.ReadLine();
                                                 Console.WriteLine("Medication: ");
-
+                                                string medication = Console.ReadLine();
                                                 Console.WriteLine("Date");
-
                                                 //.Add JOURNAL SPARA TILL LISTA.
+                                                Journal newJournal = new Journal(
+                                                      PatientUsername,
+                                                      PatientFirstName,
+                                                      PatientLastName,
+                                                      title,
+                                                      description,
+                                                      now,
+                                                      selectedPatient.UserStatus
+                                                );
                                                 break;
                                           case 'D':
                                           case 'd':
