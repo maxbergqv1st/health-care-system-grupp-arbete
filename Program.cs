@@ -2,6 +2,9 @@
 using App;
 
 SaveUserSystem userSystem = new();
+//
+SaveAppointmentSystem appointmentSystem = new();
+//
 List<IUser> users = userSystem.LoadUser();
 
 // IMPORT AppointmentFather FRÅN APOINTMENT.CS
