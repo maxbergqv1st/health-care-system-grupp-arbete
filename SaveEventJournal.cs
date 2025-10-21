@@ -1,5 +1,7 @@
 namespace App;
 
+
+
 public class Event
 {
       SaveUserSystem userSystem = new();
@@ -52,12 +54,44 @@ public class Event
                                     }
                                     Console.WriteLine("Lastname: ");
                                     string? input_lastname = Console.ReadLine();
+                                     List<IUser> matchedUsersLastname = new();
                                     foreach (IUser matched in matchedUsers)
                                     {
                                           if (input_lastname == matched.LastName) //SKA VARA MATCHED.LASTNAME
                                           {
-                                                Console.WriteLine();
+                                                Console.Clear();
+                                                matchedUsersLastname.Add(matched);
+                                                for (int i = 1; i <= matchedUsersLastname.Count; ++i)
+                                                {
+                                                      Console.WriteLine($"Patient [{i}] {matched.FirstName} {matched.LastName} {matched.Username} {matched.UserStatus}");
+                                                }
                                           }
+                                    }
+                                    Console.WriteLine("Is this the right patient");
+                                    Console.WriteLine("[A] accept | [D] denie");
+                                    ConsoleKeyInfo key2 = Console.ReadKey(true);
+                                    switch (key2.KeyChar)
+                                    {
+                                          case 'A':
+                                          case 'a':
+                                                Console.WriteLine("MAKE A JOURNAL TO PATIENT");
+                                                Console.WriteLine("Title: ");
+
+                                                Console.WriteLine("Description: ");
+
+                                                Console.WriteLine("Medication: ");
+
+                                                Console.WriteLine("Date");
+
+                                                //.Add JOURNAL SPARA TILL LISTA.
+                                                break;
+                                          case 'D':
+                                          case 'd':
+                                                found = false;
+                                                break;
+                                          default:
+                                                Console.WriteLine("Unvalid option");
+                                                break;
                                     }
                               }
 

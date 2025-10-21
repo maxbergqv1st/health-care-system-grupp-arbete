@@ -1,3 +1,9 @@
 Doctor,kevin,diyabanza,kev,abc,North
 Doctor,,,kev,,North
 Patient,dus,dus,dus,pass,North
+Doctor,Lucas,Svensson,lulle,pass,West
+Patient,Max,Bergqvist,madmax,pass,West
+Patient,Max,Svensson,mjmaxbq,pass,West
+Patient,MAx,adssad,adsa,adsads,West
+Patient,Max,Andersson,MaxAnders,pass,West
+Patient,Max,Hakansson,HakanMax,pass,West
