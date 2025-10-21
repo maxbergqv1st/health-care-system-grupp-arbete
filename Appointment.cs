@@ -1,9 +1,11 @@
+namespace App;
+
 public class AppointmentFather
 {
       public class Appointment
       {
             public string Name { get; set; }
-            public string Doctor { get; set;  }
+            public string Doctor { get; set; }
             public string Description { get; set; }
             public Appointment(string name, string doctor, string description)
             {
@@ -12,13 +14,15 @@ public class AppointmentFather
                   Description = description;
             }
 
-        //public Appointment(string? name, string? description)
-        //{
-         //   Name = name;
-          //  Description = description;
-        //}
-    }
+            //public Appointment(string? name, string? description)
+            //{
+            //   Name = name;
+            //  Description = description;
+            //}
+      }
       public List<Appointment> appointments_list = new();
+      SaveAppointmentSystem appointmentSystem = new();
+
       public void MakeAppointment()
       {
             Console.Clear();
@@ -26,13 +30,15 @@ public class AppointmentFather
             string? name = Console.ReadLine();
             Console.WriteLine($"Description: ");
             string? description = Console.ReadLine();
-            string? doctor = "";
+            string? doctor = "dasdsa";
 
             //Skapa en ny Appointment
             Appointment newAppointment = new Appointment(name, doctor, description);
             //Appointment newAppointment = new ();
             appointments_list.Add(newAppointment);
-            }
+            appointmentSystem.SaveAppointments(appointments_list);
+            appointmentSystem.LoadAppointments();
+      }
       public void ShowAppointments()
       {
 
