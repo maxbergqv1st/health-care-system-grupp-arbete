@@ -23,7 +23,7 @@ class Admin : IUser
   public Region UserStatus { get; set; }
 
 
-  List<AdminPermission> permissions = new();
+  public List<AdminPermission> permissions = new();
   public Admin(string firstname, string lastname, string username, string password, Region region)
   {
     FirstName = firstname;
@@ -46,7 +46,7 @@ class Admin : IUser
   public void GrantPermission(AdminPermission permission)
   {
     if (!permissions.Contains(permission))
-      permissions.Remove(permission);
+      permissions.Add(permission);
   }
 
   public void RevokePermission(AdminPermission permission)
