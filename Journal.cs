@@ -58,8 +58,6 @@ public class Event
                               Console.WriteLine($"Date: {j.Date} ");
                               Console.WriteLine($"Region: {j.Location} ");
                               Console.WriteLine($"Doctor: {j.Doctor}");
-
-
                         }
                   }
             }
@@ -71,12 +69,6 @@ public class Event
                   switch(key.KeyChar)
                   {
                         case '1':
-                              // for (int i = 1; i <= AllJournals.Count; ++i)
-                              // {
-                              //       Journal j = AllJournals[i];
-                              //       Console.WriteLine($"[{i}] - {j.FirstName} {j.LastName} ");
-                              // }
-
                               foreach (Journal j in AllJournals)
                               {
                                     Console.WriteLine($"Patient: {j.FirstName} {j.LastName} ");
@@ -88,10 +80,8 @@ public class Event
                               Console.ReadLine();
                               break;
                   }
-
             }
             Console.ReadLine();
-
       }
       public void AddEvent(IUser active_user)
       {
@@ -140,10 +130,8 @@ public class Event
                                                 }
                                           }
                                     }
-
                                     Console.WriteLine("Is this the right patient");
                                     Console.WriteLine("[A] accept | [D] denie");
-                                    
                                     ConsoleKeyInfo key2 = Console.ReadKey(true);
                                     switch (key2.KeyChar)
                                     {
@@ -192,7 +180,6 @@ public class Event
                                                 break;
                                     }
                               }
-
                               if (!found)
                               {
                                     Console.WriteLine("NAMN EJ MATCHAT, KÖR DENNA SCOPE");

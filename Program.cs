@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Security;
-using System.Transactions;
-using App;
+﻿using App;
 
 SaveUserSystem userSystem = new();
 //
@@ -9,10 +6,8 @@ SaveAppointmentSystem appointmentSystem = new();
 //
 List<IUser> users = userSystem.LoadUser();
 
-// IMPORT AppointmentFather FRÅN APOINTMENT.CS
 Event AddEvent = new();
 AppointmentFather Appointment = new();
-//
 
 bool running = true;
 IUser active_user = null;
@@ -20,7 +15,8 @@ IUser active_user = null;
 while (running)
 {
       bool found = false;
-      if (active_user == null)
+      bool notARobot = false;
+      if (active_user == null && notARobot == false)
       {
             Console.Clear();
             Console.WriteLine("Verify that youre not a robot.");
@@ -28,18 +24,29 @@ while (running)
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXX\nXXHXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX");
             Console.WriteLine("--------------------");
             Console.WriteLine("\nWrite the odd letter hidden in the board:");
-
             string verify = Console.ReadLine();
-
             if (verify.ToLower() == "h")
+            {
+                  notARobot = true;
+            }
+            else
+            {
+                  Console.Clear();
+                  Console.WriteLine("You stupid looking machine...");
+                  Console.WriteLine($"where the f*** did you find the letter: {verify}??\nPress ENTER if your stupid ass acually is human...");
+                  Console.ReadLine();
+                  continue;
+            }
+            if(notARobot == true)
             {
                   // ACTIVE USER = INTE HITTAD.
                   Console.Clear();
                   Console.WriteLine("----- Menu -----");
-                  Console.WriteLine("[1] Login\n[2] Register admin\n[3] Register doctor\n[4] Register patient\n[5] Quit\n");
-                  switch (Console.ReadLine())
+                  Console.WriteLine("[1] Login\n[Q] Quit\n");
+                  ConsoleKeyInfo key = Console.ReadKey(true);
+            switch (key.KeyChar)
                   {
-                        case "1":
+                        case '1':
                               {
                                     Console.Clear();
                                     Console.WriteLine("----------");
@@ -64,10 +71,10 @@ while (running)
                                     }
                               }
                               break;
-                        case "2":
+                        case '2':
                               {
                                     Console.Clear();
-                                    Console.WriteLine("----- Register -----");
+                                    Console.WriteLine("----- Register Admin -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
                                     foreach (IUser user in users)
@@ -91,10 +98,10 @@ while (running)
                                     userSystem.SaveUser(users);
                               }
                               break;
-                        case "3":
+                        case '3':
                               {
                                     Console.Clear();
-                                    Console.WriteLine("----- Register -----");
+                                    Console.WriteLine("----- Register Doctor -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
                                     foreach (IUser user in users)
@@ -118,10 +125,10 @@ while (running)
                                     userSystem.SaveUser(users);
                               }
                               break;
-                        case "4":
+                        case '4':
                               {
                                     Console.Clear();
-                                    Console.WriteLine("----- Register -----");
+                                    Console.WriteLine("----- Register Patient -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
                                     foreach (IUser user in users)
@@ -145,46 +152,36 @@ while (running)
                                     userSystem.SaveUser(users);
                               }
                               break;
-                        case "5":
+                        case 'Q':
+                        case 'q':
                               {
                                     running = false;
                               }
                               break;
                         default:
-                              continue;
-
+                              Console.WriteLine("Unvalid option...");
+                              break;
                   }
-            }
-            else
-            {
-                  Console.Clear();
-                  Console.WriteLine("You stupid looking machine...");
-                  Console.WriteLine($"where the f*** did you find the letter: {verify}??\nPress ENTER if your stupid ass acually is human...");
-                  Console.ReadLine();
-                  continue;
             }
       }
       else if (active_user.GetType().Name == "Patient")
       {
             Console.Clear();
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine("Logged in as Patient");
-            Console.WriteLine("[1] profile\n[2] Make a appointment \n[3] Show appointments \n[L]logout");
-            ConsoleKeyInfo key = Console.ReadKey(true);
+            Console.WriteLine($"----- Welcome {active_user.FirstName} -----");
+            Console.WriteLine("\n[1] View my Journal\n[2] Request an Appointment\n[3] View my Schedule\n[4] profile\n[5] Logout\n[6] Exit");    
+            ConsoleKeyInfo key = Console.ReadKey(true);       
             switch (key.KeyChar)
             {
                   case '1':
                         Console.Clear();
-                        Console.WriteLine("Profile");
-                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
                         Console.WriteLine("----- Your Journal -----");
-                        Console.ReadLine();
+                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
                         break;
                   case '2':
                         Console.Clear();
                         Console.WriteLine("----- Request Appointemnt -----");
                         Appointment.MakeAppointment();
-                        Console.ReadLine();
                         break;
                   case '3':
                         Console.Clear();
@@ -194,14 +191,12 @@ while (running)
                         Appointment.ShowAppointments();
                         //}
                         break;
-                  case '4':
-                        break;
-
-                  case '5':
+                  case 'L':
+                  case 'l':
                         active_user = null;
                         break;
-
-                  case '6':
+                  case 'Q':
+                  case 'q':
                         running = false;
                         break;
 
@@ -210,9 +205,6 @@ while (running)
                         Console.ReadLine();
                         break;
             }
-
-
-            Console.ReadLine();
       }
       else if (active_user.GetType().Name == "Doctor")
       {
@@ -237,19 +229,15 @@ while (running)
 
                   case '3':
                         AddEvent.AddEvent(active_user); // SaveEventJournal.cs
-
                         break;
                   case '4':
-                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
-
+                         AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
                         break;
-
                   case 'L':
                   case 'l':
                         active_user = null;
                         Console.WriteLine("logged out");
                         break;
-
                   default:
                         Console.WriteLine("Unvalid input...");
                         break;
