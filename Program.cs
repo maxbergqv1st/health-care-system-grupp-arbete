@@ -4,6 +4,9 @@ using System.Transactions;
 using App;
 
 SaveUserSystem userSystem = new();
+//
+SaveAppointmentSystem appointmentSystem = new();
+//
 List<IUser> users = userSystem.LoadUser();
 
 // IMPORT AppointmentFather FRÅN APOINTMENT.CS
@@ -11,24 +14,24 @@ Event AddEvent = new();
 AppointmentFather Appointment = new();
 //
 
-bool found = false;
 bool running = true;
 IUser active_user = null;
 
 while (running)
 {
+      bool found = false;
       if (active_user == null)
       {
             Console.Clear();
-            Console.WriteLine("\nVerify that youre not a robot.");
+            Console.WriteLine("Verify that youre not a robot.");
             Console.WriteLine("\n--------------------");
             Console.WriteLine("XXXXXXXXXXXXXXXXXXXX\nXXHXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXX");
             Console.WriteLine("--------------------");
-            Console.WriteLine("\nWrite the odd letter hidden in the board(small letter):");
+            Console.WriteLine("\nWrite the odd letter hidden in the board:");
 
             string verify = Console.ReadLine();
 
-            if (verify == "h")
+            if (verify.ToLower() == "h")
             {
                   // ACTIVE USER = INTE HITTAD.
                   Console.Clear();
@@ -56,6 +59,8 @@ while (running)
                                     if (found == false)
                                     {
                                           Console.WriteLine("User wasnt found...");
+                                          Console.ReadLine();
+                                          continue;
                                     }
                               }
                               break;
@@ -65,6 +70,15 @@ while (running)
                                     Console.WriteLine("----- Register -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    foreach (IUser user in users)
+                                    {
+                                          if (input_username == user.Username)
+                                          {
+                                                System.Console.WriteLine("Username already exists.");
+                                                Console.ReadLine();
+                                                continue;
+                                          }
+                                    }
                                     Console.WriteLine("First name: ");
                                     string input_firstname = Console.ReadLine();
                                     Console.WriteLine("Last name: ");
@@ -83,6 +97,15 @@ while (running)
                                     Console.WriteLine("----- Register -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    foreach (IUser user in users)
+                                    {
+                                          if (input_username == user.Username)
+                                          {
+                                                System.Console.WriteLine("Username already exists.");
+                                                Console.ReadLine();
+                                                continue;
+                                          }
+                                    }
                                     Console.WriteLine("First name: ");
                                     string input_firstname = Console.ReadLine();
                                     Console.WriteLine("Last name: ");
@@ -101,6 +124,15 @@ while (running)
                                     Console.WriteLine("----- Register -----");
                                     Console.WriteLine("Username: ");
                                     string input_username = Console.ReadLine();
+                                    foreach (IUser user in users)
+                                    {
+                                          if (input_username == user.Username)
+                                          {
+                                                System.Console.WriteLine("Username already exists.");
+                                                Console.ReadLine();
+                                                continue;
+                                          }
+                                    }
                                     Console.WriteLine("First name: ");
                                     string input_firstname = Console.ReadLine();
                                     Console.WriteLine("Last name: ");
@@ -125,45 +157,56 @@ while (running)
             }
             else
             {
+                  Console.Clear();
                   Console.WriteLine("You stupid looking machine...");
                   Console.WriteLine($"where the f*** did you find the letter: {verify}??\nPress ENTER if your stupid ass acually is human...");
                   Console.ReadLine();
                   continue;
             }
-            Console.ReadLine();
       }
       else if (active_user.GetType().Name == "Patient")
       {
             Console.Clear();
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine("Logged in as Patient");
-            Console.WriteLine("[1] profile\n[2] Make a appointment \n[3] Show appointments \n[L]logout");
-            ConsoleKeyInfo key = Console.ReadKey(true);
+            Console.WriteLine($"----- Welcome {active_user.FirstName} -----");
+            Console.WriteLine("\n[1] View my Journal\n[2] Request an Appointment\n[3] View my Schedule\n[4] profile\n[5] Logout\n[6] Exit"); ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
             {
                   case '1':
                         Console.Clear();
                         Console.WriteLine("Profile");
+                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
+                        Console.WriteLine("----- Your Journal -----");
                         Console.ReadLine();
                         break;
                   case '2':
                         Console.Clear();
-                        Console.WriteLine("----- Make a appointment -----");
+                        Console.WriteLine("----- Request Appointemnt -----");
                         Appointment.MakeAppointment();
                         Console.ReadLine();
-
-
                         break;
                   case '3':
                         Console.Clear();
-                        Console.WriteLine("----- Show a appointment -----");
+                        Console.WriteLine("----- Schedules -----");
                         // if active user finns i Appointment list
                         //{
                         Appointment.ShowAppointments();
                         //}
                         break;
-                  case 'L':
+                  case '4':
+                        break;
+
+                  case '5':
                         active_user = null;
+                        break;
+
+                  case '6':
+                        running = false;
+                        break;
+
+                  default:
+                        Console.WriteLine("Unvalid input...");
+                        Console.ReadLine();
                         break;
             }
 
@@ -176,7 +219,7 @@ while (running)
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
             Console.WriteLine("logged in as doctor");
-            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event \n[L] logout ");
+            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event\n[4] Journals\n[L] logout ");
             ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
             {
@@ -193,6 +236,10 @@ while (running)
 
                   case '3':
                         AddEvent.AddEvent(active_user); // SaveEventJournal.cs
+
+                        break;
+                  case '4':
+                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
 
                         break;
 
