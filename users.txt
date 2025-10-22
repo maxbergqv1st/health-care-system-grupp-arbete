@@ -7,3 +7,4 @@ Patient,Max,Svensson,mjmaxbq,pass,West
 Patient,MAx,adssad,adsa,adsads,West
 Patient,Max,Andersson,MaxAnders,pass,West
 Patient,Max,Hakansson,HakanMax,pass,West
+Patient,Hasse,Brasse,BrasseHasse,pass,West

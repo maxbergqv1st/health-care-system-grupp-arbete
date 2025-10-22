@@ -172,6 +172,8 @@ while (running)
             {
                   case '1':
                         Console.Clear();
+                        Console.WriteLine("Profile");
+                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
                         Console.WriteLine("----- Your Journal -----");
                         Console.ReadLine();
                         break;
@@ -215,7 +217,7 @@ while (running)
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
             Console.WriteLine("logged in as doctor");
-            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event \n[L] logout ");
+            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event\n[4] Journals\n[L] logout ");
             ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
             {
@@ -232,6 +234,10 @@ while (running)
 
                   case '3':
                         AddEvent.AddEvent(active_user); // SaveEventJournal.cs
+
+                        break;
+                  case '4':
+                         AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
                         
                         break;
 
