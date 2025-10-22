@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Design;
 using System.Security;
+using System.Transactions;
 using App;
 
 SaveUserSystem userSystem = new();
@@ -238,11 +239,111 @@ while (running)
                                           Console.Clear();
                                           Console.WriteLine("----- Manage Permissions -----");
                                           Console.WriteLine("Grant or revoke permissions here");
+
+                                          int i = 1;
+                                          List<Admin> adminList = new();
+
                                           foreach (var user in users)
+                                          {
                                                 if (user is Admin admin)
                                                 {
-                                                      Console.WriteLine($"{admin.Username} has permissions: {HasPermission()}");
+                                                      Console.WriteLine($"[{i}] {admin.Username}:");
+                                                      adminList.Add(admin);
+                                                      i++;
                                                 }
+                                          }
+
+                                          if (adminList.Count == 0)
+                                          {
+                                                Console.WriteLine("No admins here mate");
+                                                Console.ReadLine();
+                                                break;
+                                          }
+
+                                          Console.WriteLine("\nWrite the number of the admin you would like to edit permissions for");
+                                          if (int.TryParse(Console.ReadLine(), out int adminChoice) && adminChoice > 0 && adminChoice <= adminList.Count)
+                                          {
+                                                Admin selectedAdmin = adminList[adminChoice - 1];
+
+                                                while (true)
+                                                {
+                                                      Console.Clear();
+                                                      Console.WriteLine($"Editing permissions for {selectedAdmin.Username}");
+                                                      Console.WriteLine("\nPermissions:");
+                                                      int j = 1;
+
+                                                      foreach (AdminPermission perm in Enum.GetValues(typeof(AdminPermission)))
+                                                      {
+                                                            if (perm == AdminPermission.None)
+                                                            {
+                                                                  continue;
+                                                            }
+
+                                                            bool has = selectedAdmin.HasPermission(perm);
+                                                            string mark;
+
+                                                            if (has)
+                                                            {
+                                                                  mark = "[X]";
+                                                            }
+                                                            else
+                                                            {
+                                                                  mark = "[ ]";
+                                                            }
+
+                                                            Console.WriteLine($"[{j}] {perm} {mark}");
+                                                            j++;
+                                                      }
+
+                                                      Console.WriteLine("\nEnter a number to toggle permission, press 0 to go back");
+                                                      string permInput = Console.ReadLine();
+
+                                                      if (int.TryParse(permInput, out int permIndex))
+                                                      {
+                                                            if (permIndex == 0)
+                                                            {
+                                                                  break;
+                                                            }
+
+                                                            List<AdminPermission> allPerms = new();
+                                                            foreach (AdminPermission perm in Enum.GetValues(typeof(AdminPermission)))
+                                                            {
+                                                                  if (perm != AdminPermission.None)
+                                                                  {
+                                                                        allPerms.Add(perm);
+                                                                  }
+                                                            }
+
+                                                            if (permIndex > 0 && permIndex <= allPerms.Count)
+                                                            {
+                                                                  AdminPermission chosenPerm = allPerms[permIndex - 1];
+                                                                  if (selectedAdmin.HasPermission(chosenPerm))
+                                                                  {
+                                                                        selectedAdmin.RevokePermission(chosenPerm);
+                                                                        Console.WriteLine($"{chosenPerm} revoked.");
+                                                                  }
+                                                                  else
+                                                                  {
+                                                                        selectedAdmin.GrantPermission(chosenPerm);
+                                                                        Console.WriteLine($"{chosenPerm} granted.");
+                                                                  }
+
+                                                                  userSystem.SaveUser(users);
+                                                            }
+                                                            else
+                                                            {
+                                                                  Console.WriteLine("Invalid choice");
+                                                            }
+                                                      }
+                                                      else
+                                                      {
+                                                            Console.WriteLine("Invalid input");
+                                                      }
+                                                      Console.WriteLine("Press Enter to continue...");
+                                                      Console.ReadLine();
+                                                }
+                                          }
+
                                           Console.ReadLine();
                                           break;
                                     }

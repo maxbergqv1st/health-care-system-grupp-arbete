@@ -46,7 +46,7 @@ class Admin : IUser
   public void GrantPermission(AdminPermission permission)
   {
     if (!permissions.Contains(permission))
-      permissions.Remove(permission);
+      permissions.Add(permission);
   }
 
   public void RevokePermission(AdminPermission permission)
