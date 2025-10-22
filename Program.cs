@@ -168,8 +168,9 @@ while (running)
       {
             Console.Clear();
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine($"----- Welcome {active_user.FirstName} -----");
-            Console.WriteLine("\n[1] View my Journal\n[2] Request an Appointment\n[3] View my Schedule\n[4] profile\n[5] Logout\n[6] Exit"); ConsoleKeyInfo key = Console.ReadKey(true);
+            Console.WriteLine("Logged in as Patient");
+            Console.WriteLine("[1] profile\n[2] Make a appointment \n[3] Show appointments \n[L]logout");
+            ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
             {
                   case '1':
