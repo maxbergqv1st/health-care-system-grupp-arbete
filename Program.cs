@@ -41,7 +41,7 @@ while (running)
             {
                   // ACTIVE USER = INTE HITTAD.
                   Console.Clear();
-                  Console.WriteLine("----- Menu -----");
+                  Console.WriteLine("----- Welcome To Health Care System Ver. Beta 0.9 -----");
                   Console.WriteLine("[1] Login\n[Q] Quit\n");
                   ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
@@ -168,8 +168,11 @@ while (running)
       {
             Console.Clear();
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine($"----- Welcome {active_user.FirstName} -----");
-            Console.WriteLine("\n[1] View my Journal\n[2] Request an Appointment\n[3] View my Schedule\n[4] profile\n[5] Logout\n[6] Exit");    
+            Console.Write($"----- Welcome {active_user.FirstName} -----");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Status: Logged In As Patient");
+            Console.ResetColor();
+            Console.WriteLine("\n[1] View my Journal\n[2] Request an Appointment\n[3] View my Schedule\n[4] Profile\n[L] Logout\n[Q] Exit");    
             ConsoleKeyInfo key = Console.ReadKey(true);       
             switch (key.KeyChar)
             {
@@ -191,9 +194,20 @@ while (running)
                         Appointment.ShowAppointments();
                         //}
                         break;
+                  case '4':
+                        Console.Clear();
+                        Console.WriteLine("----- Profile -----");
+                        Console.WriteLine($"First Name: {active_user.FirstName}");
+                        Console.WriteLine($"Last Name: {active_user.LastName}");
+                        Console.WriteLine($"Username: {active_user.Username}");
+                        Console.WriteLine($"Region: {active_user.UserStatus}");
+                        Console.WriteLine("\nPress any key to go back...");
+                        Console.ReadKey();
+                        break;
                   case 'L':
                   case 'l':
                         active_user = null;
+                        Console.WriteLine("Logged out");
                         break;
                   case 'Q':
                   case 'q':
@@ -211,8 +225,11 @@ while (running)
             Console.Clear();
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
-            Console.WriteLine("logged in as doctor");
-            Console.WriteLine("[1] Add appointment \n[2] Show appointment \n[3] add Event\n[4] Journals\n[L] logout ");
+            Console.Write($"----- Welcome {active_user.FirstName} -----");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Status: Logged In As Doctor");
+            Console.ResetColor();
+            Console.WriteLine("\n[1] Add appointment \n[2] Show appointment \n[3] Add Event\n[4] Journals\n[L] Logout\n[Q] Exit");
             ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
             {
@@ -236,7 +253,11 @@ while (running)
                   case 'L':
                   case 'l':
                         active_user = null;
-                        Console.WriteLine("logged out");
+                        Console.WriteLine("Logged out");
+                        break;
+                  case 'Q':
+                  case 'q':
+                        running = false;
                         break;
                   default:
                         Console.WriteLine("Unvalid input...");
@@ -248,8 +269,11 @@ while (running)
             Console.Clear();
             //MACKISH ADMIN
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
-            Console.WriteLine("----- Admin Menu -----");
-            Console.WriteLine("[1] manage permissons\n[2] Assign Regions\n[3] Handle Registrations\n[4] Add Locations\n[5] Create Personell Accounts\n[6] View Permissions List\n[0] Logout");
+            Console.Write($"----- Welcome {active_user.FirstName} -----");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(" Status: Logged In As Admin");
+            Console.ResetColor();
+            Console.WriteLine("\n[1] manage permissons\n[2] Assign Regions\n[3] Handle Registrations\n[4] Add Locations\n[5] Create Personell Accounts\n[6] View Permissions List\n[0] Logout");
             string? input = Console.ReadLine();
             if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int. 
             {
