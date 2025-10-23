@@ -1,5 +1,3 @@
-using System.Net;
-
 namespace App;
 
 class Patient : IUser
