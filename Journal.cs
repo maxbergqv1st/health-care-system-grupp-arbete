@@ -46,7 +46,7 @@ public class Event
 
             if (active_user.GetType().Name == "Patient")
             {
-                  foreach(Journal j in AllJournals)
+                  foreach (Journal j in AllJournals)
                   {
                         if (active_user.Username == j.OwnerUsername) // Kollar om active username är samma som OwnerUsername i journal.txt
                         {
@@ -56,12 +56,19 @@ public class Event
                               Console.WriteLine($"Region: {j.Location} ");
                               Console.WriteLine($"Doctor: {j.Doctor}");
                         }
+                        // else if()
+                        // {
+                        //       Console.WriteLine("You have no journals right now...");
+                        //       Console.ReadLine();
+                        // }
                   }
+                  Console.ReadLine();
             }
             if(active_user.GetType().Name == "Doctor")
             {
-                  Console.WriteLine("[1] Region Journals");
+                  Console.WriteLine("[1] Show all Journals");
                   Console.WriteLine("[2] Journal related to you");
+                  // Show region journals
                   ConsoleKeyInfo key = Console.ReadKey(true);
                   switch(key.KeyChar)
                   {
@@ -73,6 +80,20 @@ public class Event
                                     Console.WriteLine($"Date: {j.Date} ");
                                     Console.WriteLine($"Region: {j.Location} ");
                                     Console.WriteLine($"Doctor: {j.Doctor}");
+                              }
+                              Console.ReadLine();
+                              break;
+                        case '2':
+                              foreach (Journal j in AllJournals)
+                              {
+                                    if(active_user.Username == j.Doctor ) 
+                                    {
+                                          Console.WriteLine($"Patient: {j.FirstName} {j.LastName} ");
+                                          Console.WriteLine($"Document: {j.Document} ");
+                                          Console.WriteLine($"Date: {j.Date} ");
+                                          Console.WriteLine($"Region: {j.Location} ");
+                                          Console.WriteLine($"Doctor: {j.Doctor}");
+                                    }
                               }
                               Console.ReadLine();
                               break;
@@ -117,7 +138,7 @@ public class Event
                                     List<IUser> selectedUser = null;
                                     foreach (IUser matched in matchedUsers)
                                     {
-                                          if (input_lastname == matched.LastName) //SKA VARA MATCHED.LASTNAME
+                                          if (input_lastname == matched.LastName)
                                           {
                                                 Console.Clear();
                                                 matchedUsersLastname.Add(matched);
@@ -163,6 +184,7 @@ public class Event
                                                       selectedPatient.UserStatus
                                                 );
                                                 journal.Add(newJournal);
+                                                
                                                 SaveJournalSystem saveSystem = new SaveJournalSystem();
                                                 saveSystem.SaveJournal(journal);
                                                 Console.WriteLine("Journal saved successfully!");
@@ -179,7 +201,7 @@ public class Event
                               }
                               if (!found)
                               {
-                                    Console.WriteLine("NAMN EJ MATCHAT, KÖR DENNA SCOPE");
+                                    //NAMN EJ MATCHAT, KÖR DENNA SCOPE
                                     Console.Clear();
                                     Console.WriteLine($"Patient name: {input_new_patient} ");
                                     string? name = input_new_patient;
