@@ -221,8 +221,7 @@ while (running)
             }
       }
       else if (active_user.GetType().Name == "Doctor")
-      {
-            Console.Clear();
+             {
             // ACTIVE USER = HITTAD USER OCH MAN ÄR INLOGGAD
             Console.Clear();
             Console.Write($"----- Welcome {active_user.FirstName} -----");
@@ -235,21 +234,49 @@ while (running)
             {
 
                   case '1':
+                        Console.Clear();
                         Console.WriteLine("----- Add appointments -----");
                         Appointment.MakeAppointment();
+                        
                         break;
 
                   case '2':
+                        Console.Clear();
                         Console.WriteLine("----- Show appointments -----");
                         Appointment.ShowAppointments();
                         break;
 
                   case '3':
-                        AddEvent.AddEvent(active_user); // SaveEventJournal.cs
+                        Console.Clear();
+                        Console.WriteLine("----- Add event -----");
+                        AddEvent.AddEvent(active_user); 
+
                         break;
                   case '4':
-                         AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
+                        Console.Clear();
+                        Console.WriteLine("----- patient journalals -----");
+                        Console.WriteLine("[1] view patient journal");
+                        Console.WriteLine("[2] mark journal");
+                        string? pjchoice = Console.ReadLine();
+
+                        switch (pjchoice)
+                        {
+                              case "1":
+                                    Console.Clear();
+                                    Console.WriteLine("----- patient journnal -----");
+                                    AddEvent.ShowJournal(active_user);
+                                    break;
+                              case "2":
+                                    Console.Clear();
+                                    Console.WriteLine("----- mark journal -----");
+                                    AddEvent.ShowJournal(active_user);  
+                                    Console.WriteLine("press enter to continue");
+                                    Console.ReadLine();
+                                    break;
+                        }
+
                         break;
+
                   case 'L':
                   case 'l':
                         active_user = null;
@@ -259,10 +286,16 @@ while (running)
                   case 'q':
                         running = false;
                         break;
+                  case 'E':
+                  case 'e':
+                        running = false;
+                        break;
+
                   default:
                         Console.WriteLine("Unvalid input...");
                         break;
             }
+            
       }
       else if (active_user.GetType().Name == "Admin")
       {
