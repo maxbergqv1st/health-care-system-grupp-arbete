@@ -25,3 +25,9 @@ Program is protected from robot access with anti-robot access system
 Journals can only be visible by doctors in thair area
 Patient can only see their owns journals and appointments
 Admins with sufficient permissions limits other admins to access different permissions based on many rules in the program
+
+# Version History
+
+23.okt VER 1.0 (small bugs fixes)
+
+22.okt Ver Beta 0.9 (Test running of program)

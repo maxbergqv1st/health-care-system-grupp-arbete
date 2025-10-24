@@ -41,7 +41,7 @@ while (running)
             {
                   // ACTIVE USER = INTE HITTAD.
                   Console.Clear();
-                  Console.WriteLine("----- Welcome To Health Care System Ver. Beta 0.9 -----");
+                  Console.WriteLine("----- Welcome To Health Care System Ver. 1.0 -----");
                   Console.WriteLine("[1] Login\n[Q] Quit\n");
                   ConsoleKeyInfo key = Console.ReadKey(true);
                   switch (key.KeyChar)
@@ -179,22 +179,22 @@ while (running)
                   case '1':
                         Console.Clear();
                         Console.WriteLine("----- Your Journal -----");
-                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
+                        AddEvent.ShowJournal(active_user); // Kopplat till klassen SaveEventJournal.cs denna metod visar jurnal för inloggade anvädare
                         break;
                   case '2':
                         Console.Clear();
                         Console.WriteLine("----- Request Appointemnt -----");
-                        Appointment.MakeAppointment();
+                        Appointment.MakeAppointment(); //Metodför att skaffa bokningsförfrågan
                         break;
                   case '3':
                         Console.Clear();
                         Console.WriteLine("----- Schedules -----");
                         // if active user finns i Appointment list
-                        //{
-                        Appointment.ShowAppointments();
-                        //}
+                        
+                        Appointment.ShowAppointments(); //visar aktuela bokningar
+                        
                         break;
-                  case '4':
+                  case '4': //Enkelt funktion som visar aktuellt information om den inloggade patienten
                         Console.Clear();
                         Console.WriteLine("----- Profile -----");
                         Console.WriteLine($"First Name: {active_user.FirstName}");
@@ -205,7 +205,7 @@ while (running)
                         Console.ReadKey();
                         break;
                   case 'L':
-                  case 'l':
+                  case 'l': //2st case l så att menyn reagerar på både stor och liten bokstav i manyval
                         active_user = null;
                         Console.WriteLine("Logged out");
                         break;
