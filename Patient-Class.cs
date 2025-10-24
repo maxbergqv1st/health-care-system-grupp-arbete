@@ -1,6 +1,6 @@
 namespace App;
 
-class Patient : IUser
+class Patient : IUser // Patient klassen representerar patienten med sina egenskaper
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -9,7 +9,7 @@ class Patient : IUser
 
     public Region UserStatus { get; set; }
 
-    public Patient(string firstname, string lastname, string username, string password, Region region)
+    public Patient(string firstname, string lastname, string username, string password, Region region) //konstruktorn i pat. klassen, används för att skapa en ny patient i systemet
     {
         FirstName = firstname;
         LastName = lastname;
@@ -18,7 +18,7 @@ class Patient : IUser
         UserStatus = region;
     }
 
-    public bool TryLogin(string username, string password)
+    public bool TryLogin(string username, string password) //Metod för inloggning kontrollerar om den angivna username och password stämmer
     {
         return username == Username && password == _password;
     }
