@@ -1,27 +1,27 @@
 namespace App;
 
-public enum AdminPermission
+public enum AdminPermission //enum-lista för vad för adminfunctions som kommer att användas 
 {
   None,
   ManagePermissions,
   AssignRegions,
   HandleRegistrations,
-  AddLocations,
-  CreatePersonellAccounts,
-  ViewPermissionsList,
+  AddLocations, //tanke att man ska kunna lägga till flera regioner eller sjukhus, tex Halmstad sjukhus
+  CreatePersonellAccounts, //göra accounts för doctor
+  ViewPermissionsList, //se men inte röra
 }
 
 class Admin : IUser
 {
 
-  public string FirstName { get; set; } //= ""; //Tomt namn för admin, måste ha ett namn för att hantera data till users.txt.
-  public string LastName { get; set; } //= "";
+  public string FirstName { get; set; } //ska vara tomt namn för admin, måste ha ett namn för att hantera data till users.txt.
+  public string LastName { get; set; } //ska också vara tom
   public string Username { get; set; }
   public string _password { get; set; }
   public Region UserStatus { get; set; }
 
 
-  public List<AdminPermission> permissions = new();
+  public List<AdminPermission> permissions = new(); //en lista som håller permissions
   public Admin(string firstname, string lastname, string username, string password, Region region)
   {
     FirstName = firstname;
@@ -36,23 +36,23 @@ class Admin : IUser
     return username == Username && password == _password; //Skickar username och password till metoden. Returnar true eller false.
   }
 
-  public bool HasPermission(AdminPermission permission)
+  public bool HasPermission(AdminPermission permission) // en bool som håller vem som har permissions
   {
     return permissions.Contains(permission);
   }
 
-  public void GrantPermission(AdminPermission permission)
+  public void GrantPermission(AdminPermission permission) //en void man kan kalla på för att godkänna permissions
   {
     if (!permissions.Contains(permission))
       permissions.Add(permission);
   }
 
-  public void RevokePermission(AdminPermission permission)
+  public void RevokePermission(AdminPermission permission) //en void man kan kalla på för att neka permissions
   {
     permissions.Remove(permission);
   }
 
-  public List<AdminPermission> GetAdminPermissions()
+  public List<AdminPermission> GetAdminPermissions()//en lista för just adminpermissions
   {
     return permissions;
   }

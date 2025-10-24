@@ -37,14 +37,14 @@ while (running)
                   Console.ReadLine();
                   continue;
             }
-            if(notARobot == true)
+            if (notARobot == true)
             {
                   // ACTIVE USER = INTE HITTAD.
                   Console.Clear();
-                  Console.WriteLine("----- Welcome To Health Care System Ver. Beta 0.9 -----");
+                  Console.WriteLine("----- Welcome To Health Care System Ver. 1.0 -----");
                   Console.WriteLine("[1] Login\n[Q] Quit\n");
                   ConsoleKeyInfo key = Console.ReadKey(true);
-            switch (key.KeyChar)
+                  switch (key.KeyChar)
                   {
                         case '1':
                               {
@@ -172,29 +172,29 @@ while (running)
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(" Status: Logged In As Patient");
             Console.ResetColor();
-            Console.WriteLine("\n[1] View my Journal\n[2] Request an Appointment\n[3] View my Schedule\n[4] Profile\n[L] Logout\n[Q] Exit");    
-            ConsoleKeyInfo key = Console.ReadKey(true);       
+            Console.WriteLine("\n[1] View my Journal\n[2] Request an Appointment\n[3] View my Schedule\n[4] Profile\n[L] Logout\n[Q] Exit");
+            ConsoleKeyInfo key = Console.ReadKey(true);
             switch (key.KeyChar)
             {
                   case '1':
                         Console.Clear();
                         Console.WriteLine("----- Your Journal -----");
-                        AddEvent.ShowJournal(active_user); // SaveEventJournal.cs
+                        AddEvent.ShowJournal(active_user); // Kopplat till klassen SaveEventJournal.cs denna metod visar jurnal för inloggade anvädare
                         break;
                   case '2':
                         Console.Clear();
                         Console.WriteLine("----- Request Appointemnt -----");
-                        Appointment.MakeAppointment();
+                        Appointment.MakeAppointment(); //Metodför att skaffa bokningsförfrågan
                         break;
                   case '3':
                         Console.Clear();
                         Console.WriteLine("----- Schedules -----");
                         // if active user finns i Appointment list
-                        //{
-                        Appointment.ShowAppointments();
-                        //}
+                        
+                        Appointment.ShowAppointments(); //visar aktuela bokningar
+                        
                         break;
-                  case '4':
+                  case '4': //Enkelt funktion som visar aktuellt information om den inloggade patienten
                         Console.Clear();
                         Console.WriteLine("----- Profile -----");
                         Console.WriteLine($"First Name: {active_user.FirstName}");
@@ -205,7 +205,7 @@ while (running)
                         Console.ReadKey();
                         break;
                   case 'L':
-                  case 'l':
+                  case 'l': //2st case l så att menyn reagerar på både stor och liten bokstav i manyval
                         active_user = null;
                         Console.WriteLine("Logged out");
                         break;
@@ -310,7 +310,7 @@ while (running)
             string? input = Console.ReadLine();
             if (int.TryParse(input, out int choice)) //Kollar om input går att konvertera till en int. 
             {
-                  if (choice != 0 && ((Admin)active_user).HasPermission((AdminPermission)choice))
+                  if (choice != 0 && ((Admin)active_user).HasPermission((AdminPermission)choice))//fångar ifall att man inte har permission
                   {
                         Console.WriteLine("Duuude what are you doing here? to acces this you need to be atleast 5ft tall...(and have permission)");
                         Console.ReadKey();
@@ -320,33 +320,33 @@ while (running)
                         switch ((AdminPermission)choice)//Switchen använder min enum AdminPermission.choice om den inte hittar caset körs default.
                         {
 
-                              case AdminPermission.None:
+                              case AdminPermission.None: //logga ut val
                                     {
                                           active_user = null;
                                           Console.WriteLine("You've been logged out.");
                                           Console.ReadLine();
                                           break;
                                     }
-                              case AdminPermission.ManagePermissions:
+                              case AdminPermission.ManagePermissions://för att ge och ta bort permissions 
                                     {
                                           Console.Clear();
                                           Console.WriteLine("----- Manage Permissions -----");
                                           Console.WriteLine("Grant or revoke permissions here");
 
                                           int i = 1;
-                                          List<Admin> adminList = new();
+                                          List<Admin> adminList = new(); //lista på admins
 
                                           foreach (var user in users)
                                           {
-                                                if (user is Admin admin)
+                                                if (user is Admin admin)//kallar på alla admins
                                                 {
                                                       Console.WriteLine($"[{i}] {admin.Username}:");
-                                                      adminList.Add(admin);
+                                                      adminList.Add(admin);//lägger till admin i listan
                                                       i++;
                                                 }
                                           }
 
-                                          if (adminList.Count == 0)
+                                          if (adminList.Count == 0)//om inga admins finns
                                           {
                                                 Console.WriteLine("No admins here mate");
                                                 Console.ReadLine();
@@ -354,25 +354,25 @@ while (running)
                                           }
 
                                           Console.WriteLine("\nWrite the number of the admin you would like to edit permissions for");
-                                          if (int.TryParse(Console.ReadLine(), out int adminChoice) && adminChoice > 0 && adminChoice <= adminList.Count)
+                                          if (int.TryParse(Console.ReadLine(), out int adminChoice) && adminChoice > 0 && adminChoice <= adminList.Count)//för att välja admin utan att kunna skriva nummer som inte finns
                                           {
                                                 Admin selectedAdmin = adminList[adminChoice - 1];
 
                                                 while (true)
                                                 {
                                                       Console.Clear();
-                                                      Console.WriteLine($"Editing permissions for {selectedAdmin.Username}");
+                                                      Console.WriteLine($"Editing permissions for {selectedAdmin.Username}"); //ser vilken admin du redigerar
                                                       Console.WriteLine("\nPermissions:");
                                                       int j = 1;
 
-                                                      foreach (AdminPermission perm in Enum.GetValues(typeof(AdminPermission)))
+                                                      foreach (AdminPermission perm in Enum.GetValues(typeof(AdminPermission))) //hämtar listan på alla permissions
                                                       {
-                                                            if (perm == AdminPermission.None)
+                                                            if (perm == AdminPermission.None)// om enum "none" kommer så hoppa över den
                                                             {
                                                                   continue;
                                                             }
 
-                                                            bool has = selectedAdmin.HasPermission(perm);
+                                                            bool has = selectedAdmin.HasPermission(perm); //en bool så att man kan markera i permissions
                                                             string mark;
 
                                                             if (has)
@@ -389,19 +389,19 @@ while (running)
                                                       }
 
                                                       Console.WriteLine("\nEnter a number to toggle permission, press 0 to go back");
-                                                      string permInput = Console.ReadLine();
+                                                      string? permInput = Console.ReadLine();
 
-                                                      if (int.TryParse(permInput, out int permIndex))
+                                                      if (int.TryParse(permInput, out int permIndex)) // läser av vilket val du gör
                                                       {
                                                             if (permIndex == 0)
                                                             {
                                                                   break;
                                                             }
 
-                                                            List<AdminPermission> allPerms = new();
-                                                            foreach (AdminPermission perm in Enum.GetValues(typeof(AdminPermission)))
+                                                            List<AdminPermission> allPerms = new(); //lista som hålla alla permissions
+                                                            foreach (AdminPermission perm in Enum.GetValues(typeof(AdminPermission)))//skriver alla permissions
                                                             {
-                                                                  if (perm != AdminPermission.None)
+                                                                  if (perm != AdminPermission.None)//tar bort permission "none" från listan
                                                                   {
                                                                         allPerms.Add(perm);
                                                                   }
@@ -410,27 +410,27 @@ while (running)
                                                             if (permIndex > 0 && permIndex <= allPerms.Count)
                                                             {
                                                                   AdminPermission chosenPerm = allPerms[permIndex - 1];
-                                                                  if (selectedAdmin.HasPermission(chosenPerm))
+                                                                  if (selectedAdmin.HasPermission(chosenPerm))//ska läsa av om den är granted eller revoked
                                                                   {
                                                                         selectedAdmin.RevokePermission(chosenPerm);
-                                                                        Console.WriteLine($"{chosenPerm} revoked.");
+                                                                        Console.WriteLine($"{chosenPerm} revoked.");//revokear permission
                                                                   }
                                                                   else
                                                                   {
                                                                         selectedAdmin.GrantPermission(chosenPerm);
-                                                                        Console.WriteLine($"{chosenPerm} granted.");
+                                                                        Console.WriteLine($"{chosenPerm} granted.");//grantar permission
                                                                   }
 
-                                                                  userSystem.SaveUser(users);
+                                                                  userSystem.SaveUser(users); //ska utvecklas för att kunna spara permission
                                                             }
                                                             else
                                                             {
-                                                                  Console.WriteLine("Invalid choice");
+                                                                  Console.WriteLine("Invalid choice");//fångar upp om man skriver fel
                                                             }
                                                       }
                                                       else
                                                       {
-                                                            Console.WriteLine("Invalid input");
+                                                            Console.WriteLine("Invalid input");//fångar upp om man skriver fel
                                                       }
                                                       Console.WriteLine("Press Enter to continue...");
                                                       Console.ReadLine();
@@ -440,14 +440,14 @@ while (running)
                                           Console.ReadLine();
                                           break;
                                     }
-                              case AdminPermission.AssignRegions:
+                              case AdminPermission.AssignRegions://ska kunna set:a regioner på olika users
                                     {
                                           Console.Clear();
                                           Console.WriteLine("----- Assign Regions -----");
                                           Console.ReadLine();
                                           break;
                                     }
-                              case AdminPermission.HandleRegistrations:
+                              case AdminPermission.HandleRegistrations://för att kunna accepta eller deny registrering av paitents
                                     {
                                           Console.Clear();
                                           Console.WriteLine("----- Handle Registrations -----");
@@ -455,7 +455,7 @@ while (running)
                                           Console.ReadLine();
                                           break;
                                     }
-                              case AdminPermission.AddLocations:
+                              case AdminPermission.AddLocations://tanke att man ska kunna lägga till flera regioner eller sjukhus, tex Halmstad sjukhus
                                     {
                                           Console.Clear();
                                           Console.WriteLine("----- Add Locations -----");
@@ -463,18 +463,18 @@ while (running)
                                           break;
                                     }
 
-                              case AdminPermission.CreatePersonellAccounts:
+                              case AdminPermission.CreatePersonellAccounts: // för att skapa doktorer
                                     {
                                           Console.Clear();
                                           Console.WriteLine("----- Create Personell Accounts -----");
                                           Console.ReadLine();
                                           break;
                                     }
-                              case AdminPermission.ViewPermissionsList:
+                              case AdminPermission.ViewPermissionsList://för att se men inte röra permissionlistan
                                     {
                                           Console.Clear();
                                           Console.WriteLine("----- View Permissions List -----");
-                                          //Läg in HasPermission här, tror jag..
+                                          //Läg in HasPermission här.
                                           Console.ReadLine();
 
 
