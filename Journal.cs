@@ -48,7 +48,12 @@ public class Event
             {
                   foreach (Journal j in AllJournals)
                   {
-                        if (active_user.Username == j.OwnerUsername) // Kollar om active username är samma som OwnerUsername i journal.txt
+                        if (active_user.Username != j.OwnerUsername) // Kollar om active username är samma som OwnerUsername i journal.txt
+                        {
+                              Console.WriteLine("You have no journals right now...");
+                              Console.ReadLine();
+                        }
+                        else
                         {
                               Console.WriteLine($"Patient: {j.FirstName} {j.LastName} ");
                               Console.WriteLine($"Document: {j.Document} ");
@@ -56,11 +61,6 @@ public class Event
                               Console.WriteLine($"Region: {j.Location} ");
                               Console.WriteLine($"Doctor: {j.Doctor}");
                         }
-                        // else if()
-                        // {
-                        //       Console.WriteLine("You have no journals right now...");
-                        //       Console.ReadLine();
-                        // }
                   }
                   Console.ReadLine();
             }
@@ -111,7 +111,7 @@ public class Event
                   case '1':
                         {
                               Console.Clear();
-                              Console.WriteLine("----- Add Event ------");
+                              Console.WriteLine($"----- Add Event {active_user.FirstName} {active_user.UserStatus} ------");
                               Console.WriteLine("Patient name: ");
                               string? input_new_patient = Console.ReadLine();
                               List<IUser> matchedUsers = new();
@@ -126,11 +126,11 @@ public class Event
                               if (matchedUsers.Count > 0)
                               {
                                     Console.Clear();
-                                    Console.WriteLine($"\n----- Users {input_new_patient} ------");
+                                    Console.WriteLine($"----- Users {input_new_patient} ------\n");
                                     found = true;
                                     foreach (IUser matched in matchedUsers)
                                     {
-                                          Console.WriteLine($"Patient {matched.FirstName} {matched.LastName} {matched.Username} {matched.UserStatus}");
+                                          Console.WriteLine($"Patient {matched.FirstName} {matched.LastName} Username: {matched.Username} Region: {matched.UserStatus}");
                                     }
                                     Console.WriteLine("Lastname: ");
                                     string? input_lastname = Console.ReadLine();
@@ -192,7 +192,7 @@ public class Event
                                                 break;
                                           case 'D':
                                           case 'd':
-                                                found = false;
+                                                found = false; // Om jag deniear är found frf false och !found scopet ska köras.
                                                 break;
                                           default:
                                                 Console.WriteLine("Unvalid option");
