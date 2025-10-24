@@ -1,8 +1,7 @@
 Doctor,kevin,diyabanza,kev,abc,North
 Doctor,,,kev,,North
-Admin,mar,pass,Patient,dus,North
-Doctor,Lucas,Northing,drlulle,pass,North
-Doctor,Lucas,Westin,lulle,pass,West
+Admin,marcus,jakobsson,mar,pass,North
+Doctor,Lucas,Svensson,lulle,pass,North
 Patient,Max,Bergqvist,madmax,pass,West
 Patient,Max,Svensson,mjmaxbq,pass,West
 Patient,MAx,adssad,adsa,adsads,West
